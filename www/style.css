@@ -1,0 +1,31 @@
+.navbar{ 
+  background-color: #afc9f6;
+}
+
+.btn-default{
+  background-color: #afc9f6;  
+}
+
+p{
+  text-align: center;
+  color:black;
+  background-color:lavender;
+  padding:15px;
+  border-radius:10px
+}
+
+h3{
+  text-align: center;
+  color:black;
+  background-color:lavender;
+  padding:15px;
+  border-radius:10px
+}
+
+.progress-bar{
+  background-color: #afc9f6;
+}
+
+.well{
+  background-color:lavender;
+}

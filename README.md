@@ -1,12 +1,12 @@
 # Zlog_AdRI
 
-<img src="Logo.svg" width="225px" height="150px" align="right"/>
+<img src="www/Logo.svg" width="225px" height="150px" align="right"/>
 
 **Shiny App for show Zlog value**
 
-This Shiny App computes for each age group the zlog values of the preceding and the subsequent age group for different analytes, see the [Wiki (https://github.com/SandraKla/Zlog_AdRI/wiki). 
+This Shiny App computes for each age group the zlog values of the preceding and the subsequent age group for different analytes, see the [Wiki] (https://github.com/SandraKla/Zlog_AdRI/wiki). 
 
-<img src="shiny.png" align="center"/>
+<img src="www/shiny.png" align="center"/>
 
 ## Installation
 

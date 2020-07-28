@@ -1,0 +1,331 @@
+CODE;CODE2;EINHEIT;SEX;ZEITRAUM;ALTERVON;ALTERBIS;NORMVON;NORMBIS
+Direct Bilirubin;Direct Bilirubin;µmol/L;W;day;0;14;5,7;12,1
+Direct Bilirubin;Direct Bilirubin;µmol/L;W;day;15;365;0,8;5,2
+Direct Bilirubin;Direct Bilirubin;µmol/L;W;year;1;9;0,8;3,4
+Direct Bilirubin;Direct Bilirubin;µmol/L;W;year;9;13;0,8;5
+Direct Bilirubin;Direct Bilirubin;µmol/L;W;year;13;19;1,7;6,7
+Direct Bilirubin;Direct Bilirubin;µmol/L;M;day;0;14;5,7;12,1
+Direct Bilirubin;Direct Bilirubin;µmol/L;M;day;15;365;0,8;5,2
+Direct Bilirubin;Direct Bilirubin;µmol/L;M;year;1;9;0,8;3,4
+Direct Bilirubin;Direct Bilirubin;µmol/L;M;year;9;13;0,8;5
+Direct Bilirubin;Direct Bilirubin;µmol/L;M;year;13;19;1,9;7,1
+Total Bilirubin;Total Bilirubin;µmol/L;W;day;0;4;3,3;283,8
+Total Bilirubin;Total Bilirubin;µmol/L;W;day;15;365;0,8;11,7
+Total Bilirubin;Total Bilirubin;µmol/L;W;year;1;9;0,8;6,8
+Total Bilirubin;Total Bilirubin;µmol/L;W;year;9;12;0,8;9,4
+Total Bilirubin;Total Bilirubin;µmol/L;W;year;12;15;1,7;11,9
+Total Bilirubin;Total Bilirubin;µmol/L;W;year;15;19;1,7;14,4
+Total Bilirubin;Total Bilirubin;µmol/L;M;day;0;14;3,3;283,8
+Total Bilirubin;Total Bilirubin;µmol/L;M;day;15;365;0,8;11,7
+Total Bilirubin;Total Bilirubin;µmol/L;M;year;1;9;0,8;6,8
+Total Bilirubin;Total Bilirubin;µmol/L;M;year;9;12;0,8;9,4
+Total Bilirubin;Total Bilirubin;µmol/L;M;year;12;15;1,7;11,9
+Total Bilirubin;Total Bilirubin;µmol/L;M;year;15;19;1,7;14,4
+Calcium;Calcium;mmol/L;W;year;0;1;2,13;2,74
+Calcium;Calcium;mmol/L;W;year;1;19;2,29;2,63
+Calcium;Calcium;mmol/L;M;year;0;1;2,13;2,74
+Calcium;Calcium;mmol/L;M;year;1;19;2,29;2,63
+Carbon Dioxide ;CO2;mmol/L;W;day;0;14;5;20
+Carbon Dioxide ;CO2;mmol/L;W;day;15;365;10;24
+Carbon Dioxide ;CO2;mmol/L;W;year;1;5;14;24
+Carbon Dioxide ;CO2;mmol/L;W;year;5;15;17;26
+Carbon Dioxide ;CO2;mmol/L;W;year;15;19;17;26
+Carbon Dioxide ;CO2;mmol/L;M;day;0;14;5;20
+Carbon Dioxide ;CO2;mmol/L;M;day;15;365;10;24
+Carbon Dioxide ;CO2;mmol/L;M;year;1;5;14;24
+Carbon Dioxide ;CO2;mmol/L;M;year;5;15;17;26
+Carbon Dioxide ;CO2;mmol/L;M;year;15;19;18;28
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;W;year;0;14;29;82
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;W;day;15;2;9;32
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;W;year;2;5;18;38
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;W;year;5;12;27;54
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;W;year;12;15;40;72
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;W;year;15;19;43;74
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;M;day;0;14;29;82
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;M;day;15;730;9;32
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;M;year;2;5;18;38
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;M;year;5;12;27;54
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;M;year;12;15;40;72
+Creatinine (Enzymatic);Creatinine (Enzymatic);µmol/L;M;year;15;19;55;96
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;W;day;0;14;37;93
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;W;day;15;365;28;47
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;W;year;1;4;34;48
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;W;year;4;7;39;57
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;W;year;7;12;46;61
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;W;year;12;15;50;71
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;W;year;15;17;52;76
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;W;year;17;19;53;78
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;M;day;0;14;37;93
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;M;day;15;365;28;47
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;M;year;1;4;34;48
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;M;year;4;7;39;57
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;M;year;7;12;46;61
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;M;year;12;15;50;71
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;M;year;15;17;58;92
+Creatinine (Jaffe) ;Creatinine (Jaffe) ;µmol/L;M;year;17;19;61;97
+Iron;Iron;µmol/L;W;year;0;14;2,8;22,9
+Iron;Iron;µmol/L;W;year;14;19;3,5;29
+Iron;Iron;µmol/L;M;year;0;14;2,8;22,9
+Iron;Iron;µmol/L;M;year;14;19;5,5;30
+Magensium;Magensium;mmol/L;W;day;0;14;0,82;1,62
+Magensium;Magensium;mmol/L;W;day;15;365;0,81;1,27
+Magensium;Magensium;mmol/L;W;year;1;19;0,86;1,17
+Magensium;Magensium;mmol/L;M;day;0;14;0,82;1,62
+Magensium;Magensium;mmol/L;M;day;15;365;0,81;1,27
+Magensium;Magensium;mmol/L;M;year;1;19;0,86;1,17
+Phosphate;Phosphate;mmol/L;W;day;0;14;1,8;3,4
+Phosphate;Phosphate;mmol/L;W;day;15;365;1,54;2,72
+Phosphate;Phosphate;mmol/L;W;year;1;5;1,38;2,19
+Phosphate;Phosphate;mmol/L;W;year;5;13;1,33;1,92
+Phosphate;Phosphate;mmol/L;W;year;13;16;1,02;1,79
+Phosphate;Phosphate;mmol/L;W;year;16;19;0,95;1,62
+Phosphate;Phosphate;mmol/L;M;day;0;14;1,8;3,4
+Phosphate;Phosphate;mmol/L;M;day;15;365;1,54;2,72
+Phosphate;Phosphate;mmol/L;M;year;1;5;1,38;2,19
+Phosphate;Phosphate;mmol/L;M;year;5;13;1,33;1,92
+Phosphate;Phosphate;mmol/L;M;year;13;16;1,14;1,99
+Phosphate;Phosphate;mmol/L;M;year;16;19;0,95;1,62
+Urea;Urea;mmol/L;W;day;0;14;1;8,2
+Urea;Urea;mmol/L;W;day;15;365;1,2;6
+Urea;Urea;mmol/L;W;year;1;10;3,2;7,9
+Urea;Urea;mmol/L;W;year;10;19;2,6;6,8
+Urea;Urea;mmol/L;M;day;0;14;1;8,2
+Urea;Urea;mmol/L;M;day;15;365;1,2;6
+Urea;Urea;mmol/L;M;year;1;10;3,2;7,9
+Urea;Urea;mmol/L;M;year;10;19;2,6;7,5
+Uric Acid ;Uric Acid ;mmol/L;W;day;0;14;1;8,2
+Uric Acid ;Uric Acid ;mmol/L;W;day;15;365;1,2;6
+Uric Acid ;Uric Acid ;mmol/L;W;year;1;10;3,2;7,9
+Uric Acid ;Uric Acid ;mmol/L;W;year;10;19;2,6;6,8
+Uric Acid ;Uric Acid ;mmol/L;M;day;0;14;1;8,2
+Uric Acid ;Uric Acid ;mmol/L;M;day;15;365;1,2;6
+Uric Acid ;Uric Acid ;mmol/L;M;year;1;10;3,2;7,9
+Uric Acid ;;mmol/L;M;year;10;19;2,6;7,5
+Alkaline Phosphatase;ALP;U/L;W;day;0;14;90;273
+Alkaline Phosphatase;ALP;U/L;W;day;15;365;134;518
+Alkaline Phosphatase;ALP;U/L;W;year;1;10;156;369
+Alkaline Phosphatase;ALP;U/L;W;year;10;13;141;460
+Alkaline Phosphatase;ALP;U/L;W;year;13;15;62;280
+Alkaline Phosphatase;ALP;U/L;W;year;15;17;54;128
+Alkaline Phosphatase;ALP;U/L;W;year;17;19;48;95
+Alkaline Phosphatase;ALP;U/L;M;day;0;14;90;273
+Alkaline Phosphatase;ALP;U/L;M;day;15;365;134;518
+Alkaline Phosphatase;ALP;U/L;M;year;1;10;156;369
+Alkaline Phosphatase;ALP;U/L;M;year;10;13;141;460
+Alkaline Phosphatase;ALP;U/L;M;year;13;15;127;517
+Alkaline Phosphatase;ALP;U/L;M;year;15;17;89;365
+Alkaline Phosphatase;ALP;U/L;M;year;17;19;59;164
+Alanine Aminotransferase (ALT);ALT;U/L;W;year;0;1;5;33
+Alanine Aminotransferase (ALT);ALT;U/L;W;year;1;13;9;25
+Alanine Aminotransferase (ALT);ALT;U/L;W;year;13;19;8;22
+Alanine Aminotransferase (ALT);ALT;U/L;M;year;0;1;5;33
+Alanine Aminotransferase (ALT);ALT;U/L;M;year;1;13;9;25
+Alanine Aminotransferase (ALT);ALT;U/L;M;year;13;19;9;24
+Alanine Aminotransferase (ALT ACT);ALT ACT;U/L;W;year;0;1;5;51
+Alanine Aminotransferase (ALT ACT);ALT ACT;U/L;W;year;1;13;11;30
+Alanine Aminotransferase (ALT ACT);ALT ACT;U/L;W;year;13;19;8;24
+Alanine Aminotransferase (ALT ACT);ALT ACT;U/L;M;year;0;1;5;51
+Alanine Aminotransferase (ALT ACT);ALT ACT;U/L;M;year;1;13;11;30
+Alanine Aminotransferase (ALT ACT);ALT ACT;U/L;M;year;13;19;10;33
+Amylase;Amylase;U/L;W;day;0;14;3;10
+Amylase;Amylase;U/L;W;day;2;13;2;22
+Amylase;Amylase;U/L;W;week;13;52;3;50
+Amylase;Amylase;U/L;W;year;1;19;25;101
+Amylase;Amylase;U/L;M;day;0;14;3;10
+Amylase;Amylase;U/L;M;day;2;13;2;22
+Amylase;Amylase;U/L;M;week;13;52;3;50
+Amylase;Amylase;U/L;M;year;1;19;25;101
+Aspartate Aminotransferase (AST);AST;U/L;W;day;0;14;32;162
+Aspartate Aminotransferase (AST);AST;U/L;W;day;15;365;20;67
+Aspartate Aminotransferase (AST);AST;U/L;W;year;1;7;21;44
+Aspartate Aminotransferase (AST);AST;U/L;W;year;7;12;18;36
+Aspartate Aminotransferase (AST);AST;U/L;W;year;12;19;13;26
+Aspartate Aminotransferase (AST);AST;U/L;M;day;0;14;32;162
+Aspartate Aminotransferase (AST);AST;U/L;M;day;15;365;20;67
+Aspartate Aminotransferase (AST);AST;U/L;M;year;1;7;21;44
+Aspartate Aminotransferase (AST);AST;U/L;M;year;7;12;18;36
+Aspartate Aminotransferase (AST);AST;U/L;M;year;12;19;14;35
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;W;day;0;14;23;186
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;W;day;15;365;23;83
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;W;year;1;7;26;55
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;W;year;7;12;22;41
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;W;year;12;19;17;33
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;M;day;0;14;32;162
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;M;day;15;365;20;67
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;M;year;1;7;21;44
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;M;year;7;12;18;36
+Aspartate Aminotransferase (AST ACT);AST ACT;U/L;M;year;12;19;14;35
+Cholinesterase;Cholinesterase;U/L;W;day;0;14;4421;9722
+Cholinesterase;Cholinesterase;U/L;W;day;15;365;5182;16027
+Cholinesterase;Cholinesterase;U/L;W;year;1;17;7769;15206
+Cholinesterase;Cholinesterase;U/L;W;year;17;19;7511;10904
+Cholinesterase;Cholinesterase;U/L;M;day;0;14;4421;9722
+Cholinesterase;Cholinesterase;U/L;M;day;15;365;5182;16027
+Cholinesterase;Cholinesterase;U/L;M;year;1;17;7769;15206
+Cholinesterase;Cholinesterase;U/L;M;year;17;19;8186;12639
+Gamma-Glutamyl Transferase;Gamma-Glutamyl Transferase;U/L;W;day;0;14;23;219
+Gamma-Glutamyl Transferase;Gamma-Glutamyl Transferase;U/L;W;day;15;365;8;127
+Gamma-Glutamyl Transferase;Gamma-Glutamyl Transferase;U/L;W;year;1;11;6;16
+Gamma-Glutamyl Transferase;Gamma-Glutamyl Transferase;U/L;W;year;11;19;7;21
+Gamma-Glutamyl Transferase;Gamma-Glutamyl Transferase;U/L;M;day;0;14;23;219
+Gamma-Glutamyl Transferase;Gamma-Glutamyl Transferase;U/L;M;day;15;365;8;127
+Gamma-Glutamyl Transferase;Gamma-Glutamyl Transferase;U/L;M;year;1;11;6;16
+Gamma-Glutamyl Transferase;Gamma-Glutamyl Transferase;U/L;M;year;11;19;7;21
+Lactate Dehydrogenase;LDH;U/L;W;day;0;14;309;1222
+Lactate Dehydrogenase;LDH;U/L;W;day;15;1;163;452
+Lactate Dehydrogenase;LDH;U/L;W;year;1;10;192;321
+Lactate Dehydrogenase;LDH;U/L;W;year;19;15;157;272
+Lactate Dehydrogenase;LDH;U/L;W;year;15;19;130;250
+Lactate Dehydrogenase;LDH;U/L;M;day;0;14;309;1222
+Lactate Dehydrogenase;LDH;U/L;M;day;15;1;163;452
+Lactate Dehydrogenase;LDH;U/L;M;year;1;10;192;321
+Lactate Dehydrogenase;LDH;U/L;M;year;19;15;170;283
+Lactate Dehydrogenase;LDH;U/L;M;year;15;19;130;250
+Lipase;Lipase;U/L;W;year;0;19;4;39
+Lipase;Lipase;U/L;M;year;0;19;4;39
+Apolipoprotein AI;Apo Al;g/L;W;day;0;14;0,71;0,97
+Apolipoprotein AI;Apo Al;g/L;W;day;15;365;0,53;1,75
+Apolipoprotein AI;Apo Al;g/L;W;year;1;14;0,8;1,64
+Apolipoprotein AI;Apo Al;g/L;W;year;14;19;0,72;1,54
+Apolipoprotein AI;Apo Al;g/L;M;day;0;14;0,62;0,91
+Apolipoprotein AI;Apo Al;g/L;M;day;15;365;0,53;1,75
+Apolipoprotein AI;Apo Al;g/L;M;year;1;14;0,8;1,64
+Apolipoprotein AI;Apo Al;g/L;M;year;14;19;0,72;1,54
+Apolipoprotein B;Apo B;g/L;W;day;0;14;0,09;0,67
+Apolipoprotein B;Apo B;g/L;W;day;15;365;0,19;1,23
+Apolipoprotein B;Apo B;g/L;W;year;1;6;0,41;0,93
+Apolipoprotein B;Apo B;g/L;W;year;6;19;0,31;0,84
+Apolipoprotein B;Apo B;g/L;M;day;0;14;0,09;0,67
+Apolipoprotein B;Apo B;g/L;M;day;15;365;0,19;1,23
+Apolipoprotein B;Apo B;g/L;M;year;1;6;0,41;0,93
+Apolipoprotein B;Apo B;g/L;M;year;6;19;0,31;0,84
+Cholesterol;Cholesterol;mmol/L;W;day;0;14;1,2;3,23
+Cholesterol;Cholesterol;mmol/L;W;day;15;365;1,66;6,13
+Cholesterol;Cholesterol;mmol/L;W;year;1;19;2,9;5,4
+Cholesterol;Cholesterol;mmol/L;M;day;0;14;1,1;2,82
+Cholesterol;Cholesterol;mmol/L;M;day;15;365;1,66;6,13
+Cholesterol;Cholesterol;mmol/L;M;year;1;19;2,9;5,4
+Direct HDL-Cholesterol ;UHDL;mmol/L;W;day;0;14;0,4;1,08
+Direct HDL-Cholesterol ;UHDL;mmol/L;W;day;15;365;0,3;1,85
+Direct HDL-Cholesterol ;UHDL;mmol/L;W;year;1;4;0,84;1,63
+Direct HDL-Cholesterol ;UHDL;mmol/L;W;year;4;13;0,92;1,88
+Direct HDL-Cholesterol ;UHDL;mmol/L;W;year;13;19;0,83;1,86
+Direct HDL-Cholesterol ;UHDL;mmol/L;M;day;0;14;0,4;1,08
+Direct HDL-Cholesterol ;UHDL;mmol/L;M;day;15;365;0,3;1,85
+Direct HDL-Cholesterol ;UHDL;mmol/L;M;year;1;4;0,84;1,63
+Direct HDL-Cholesterol ;UHDL;mmol/L;M;year;4;13;0,92;1,88
+Direct HDL-Cholesterol ;UHDL;mmol/L;M;year;13;19;0,82;1,77
+Triglycerides;Triglycerides;mmol/L;W;day;0;14;0,93;2,93
+Triglycerides;Triglycerides;mmol/L;W;day;15;1;0,6;2,92
+Triglycerides;Triglycerides;mmol/L;W;year;1;19;0,5;2,23
+Triglycerides;Triglycerides;mmol/L;M;day;0;14;0,93;2,93
+Triglycerides;Triglycerides;mmol/L;M;day;15;1;0,6;2,92
+Triglycerides;Triglycerides;mmol/L;M;year;1;19;0,5;2,23
+Albumin G ;Bromcresol Green;g/L;W;day;0;14;33;45
+Albumin G ;Bromcresol Green;g/L;W;day;15;1;28;47
+Albumin G ;Bromcresol Green;g/L;W;year;1;8;38;47
+Albumin G ;Bromcresol Green;g/L;W;year;8;15;41;48
+Albumin G ;Bromcresol Green;g/L;W;year;15;19;40;49
+Albumin G ;Bromcresol Green;g/L;M;day;0;14;33;45
+Albumin G ;Bromcresol Green;g/L;M;day;15;1;28;47
+Albumin G ;Bromcresol Green;g/L;M;year;1;8;38;47
+Albumin G ;Bromcresol Green;g/L;M;year;8;15;41;48
+Albumin G ;Bromcresol Green;g/L;M;year;15;19;41;51
+Albumin P;Bromcresol Purple;g/L;W;day;0;14;28;41
+Albumin P;Bromcresol Purple;g/L;W;day;15;1;25;46
+Albumin P;Bromcresol Purple;g/L;W;year;1;8;35;45
+Albumin P;Bromcresol Purple;g/L;W;year;8;15;37;47
+Albumin P;Bromcresol Purple;g/L;W;year;15;19;35;49
+Albumin P;Bromcresol Purple;g/L;M;day;0;14;28;41
+Albumin P;Bromcresol Purple;g/L;M;day;15;1;25;46
+Albumin P;Bromcresol Purple;g/L;M;year;1;8;35;45
+Albumin P;Bromcresol Purple;g/L;M;year;8;15;37;47
+Albumin P;Bromcresol Purple;g/L;M;year;15;19;38;50
+Antistreptolysin-O;ASO;IU/mL;W;month;0;6;0;0
+Antistreptolysin-O;ASO;IU/mL;W;month;6;1;0;30
+Antistreptolysin-O;ASO;IU/mL;W;year;1;6;0;104
+Antistreptolysin-O;ASO;IU/mL;W;year;6;19;0;331
+Antistreptolysin-O;ASO;IU/mL;M;month;0;6;0;0
+Antistreptolysin-O;ASO;IU/mL;M;month;6;1;0;30
+Antistreptolysin-O;ASO;IU/mL;M;year;1;6;0;104
+Antistreptolysin-O;ASO;IU/mL;M;year;6;19;0;331
+Complement C3;C3;g/L;W;day;0;14;0,5;1,21
+Complement C3;C3;g/L;W;day;15;1;0,51;1,6
+Complement C3;C3;g/L;W;year;1;19;0,83;1,52
+Complement C3;C3;g/L;M;day;0;14;0,5;1,21
+Complement C3;C3;g/L;M;day;15;1;0,51;1,6
+Complement C3;C3;g/L;M;year;1;19;0,83;1,52
+Complement C4;C4;g/L;W;year;0;1;0,07;0,3
+Complement C4;C4;g/L;W;year;1;19;0,13;0,37
+Complement C4;C4;g/L;M;year;0;1;0,07;0,3
+Complement C4;C4;g/L;M;year;1;19;0,13;0,37
+C-reactive protein - High Sensitivity;CRP;mg/L;W;day;0;14;0,3;6,1
+C-reactive protein - High Sensitivity;CRP;mg/L;W;day;15;5475;0,1;1
+C-reactive protein - High Sensitivity;CRP;mg/L;W;year;15;19;0,1;1,7
+C-reactive protein - High Sensitivity;CRP;mg/L;M;day;0;14;0,3;6,1
+C-reactive protein - High Sensitivity;CRP;mg/L;M;day;15;5475;0,1;1
+C-reactive protein - High Sensitivity;CRP;mg/L;M;year;15;19;0,1;1,7
+Haptoglobin;Haptoglobin;g/L;W;day;0;14;0;0,1
+Haptoglobin;Haptoglobin;g/L;W;day;15;1;0,07;2,21
+Haptoglobin;Haptoglobin;g/L;W;year;1;12;0,07;1,63
+Haptoglobin;Haptoglobin;g/L;W;year;12;19;0,07;1,79
+Haptoglobin;Haptoglobin;g/L;M;day;0;14;0;0,1
+Haptoglobin;Haptoglobin;g/L;M;day;15;1;0,07;2,21
+Haptoglobin;Haptoglobin;g/L;M;year;1;12;0,07;1,63
+Haptoglobin;Haptoglobin;g/L;M;year;12;19;0,07;1,79
+Immunoglobulin A;IgA;g/L;W;year;0;1;0;0,3
+Immunoglobulin A;IgA;g/L;W;year;1;3;0;0,9
+Immunoglobulin A;IgA;g/L;W;year;3;6;0,3;1,5
+Immunoglobulin A;IgA;g/L;W;year;6;14;0,5;2,2
+Immunoglobulin A;IgA;g/L;W;year;14;19;0,5;2,9
+Immunoglobulin A;IgA;g/L;M;year;0;1;0;0,3
+Immunoglobulin A;IgA;g/L;M;year;1;3;0;0,9
+Immunoglobulin A;IgA;g/L;M;year;3;6;0,3;1,5
+Immunoglobulin A;IgA;g/L;M;year;6;14;0,5;2,2
+Immunoglobulin A;IgA;g/L;M;year;14;19;0,5;2,9
+Immunoglobulin G;IgG;g/L;W;day;0;14;3,2;14
+Immunoglobulin G;IgG;g/L;W;day;15;365;1,1;7
+Immunoglobulin G;IgG;g/L;W;year;1;4;3,2;11,5
+Immunoglobulin G;IgG;g/L;W;year;4;10;5,4;13,6
+Immunoglobulin G;IgG;g/L;W;year;10;19;6,6;15,3
+Immunoglobulin G;IgG;g/L;M;day;0;14;3,2;14
+Immunoglobulin G;IgG;g/L;M;day;15;365;1,1;7
+Immunoglobulin G;IgG;g/L;M;year;1;4;3,2;11,5
+Immunoglobulin G;IgG;g/L;M;year;4;10;5,4;13,6
+Immunoglobulin G;IgG;g/L;M;year;10;19;6,6;15,3
+Immunoglobulin M;IgM;g/L;W;day;0;14;0,1;0,4
+Immunoglobulin M;IgM;g/L;W;week;2;13;0,1;0,7
+Immunoglobulin M;IgM;g/L;W;week;13;52;0,2;0,9
+Immunoglobulin M;IgM;g/L;W;year;1;19;0,5;1,9
+Immunoglobulin M;IgM;g/L;M;day;0;14;0,1;0,4
+Immunoglobulin M;IgM;g/L;M;week;2;13;0,1;0,7
+Immunoglobulin M;IgM;g/L;M;week;13;52;0,2;0,9
+Immunoglobulin M;IgM;g/L;M;year;1;19;0,4;1,5
+Prealbumin;Prealbumin;g/L;W;day;0;14;0,02;0,12
+Prealbumin;Prealbumin;g/L;W;day;15;1;0,05;0,24
+Prealbumin;Prealbumin;g/L;W;year;1;5;0,12;0,23
+Prealbumin;Prealbumin;g/L;W;year;5;13;0,14;0,26
+Prealbumin;Prealbumin;g/L;W;year;13;16;0,18;0,31
+Prealbumin;Prealbumin;g/L;W;year;16;19;0,17;0,33
+Prealbumin;Prealbumin;g/L;M;day;0;14;0,02;0,12
+Prealbumin;Prealbumin;g/L;M;day;15;1;0,05;0,24
+Prealbumin;Prealbumin;g/L;M;year;1;5;0,12;0,23
+Prealbumin;Prealbumin;g/L;M;year;5;13;0,14;0,26
+Prealbumin;Prealbumin;g/L;M;year;13;16;0,18;0,31
+Prealbumin;Prealbumin;g/L;M;year;16;19;0,2;0,35
+Total  Protein;Total  Protein;g/L;W;day;0;14;53;83
+Total  Protein;Total  Protein;g/L;W;day;15;1;44;71
+Total  Protein;Total  Protein;g/L;W;year;1;6;61;75
+Total  Protein;Total  Protein;g/L;W;year;6;9;64;77
+Total  Protein;Total  Protein;g/L;W;year;9;19;65;81
+Total  Protein;Total  Protein;g/L;M;day;0;14;53;83
+Total  Protein;Total  Protein;g/L;M;day;15;1;44;71
+Total  Protein;Total  Protein;g/L;M;year;1;6;61;75
+Total  Protein;Total  Protein;g/L;M;year;6;9;64;77
+Total  Protein;Total  Protein;g/L;M;year;9;19;65;81
+Transferrin;Transferrin;g/L;W;week;0;9;1,04;2,24
+Transferrin;Transferrin;g/L;W;week;9;52;1,07;3,24
+Transferrin;Transferrin;g/L;W;year;1;19;2,2;3,37
+Transferrin;Transferrin;g/L;M;week;0;9;1,04;2,24
+Transferrin;Transferrin;g/L;M;week;9;52;1,07;3,24
+Transferrin;Transferrin;g/L;M;year;1;19;2,2;3,37
