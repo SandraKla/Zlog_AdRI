@@ -17,7 +17,7 @@ ui <- fluidPage(
     sidebarLayout(
       
       ################################# Sidebar ###################################################
-      sidebarPanel(width = 2, h4(strong("Z-Log Standardization"),"for Reference Intervals"), hr(),
+      sidebarPanel(width = 2, h4(strong("Consistency check"),"for Age-dependent Reference Intervals"), hr(),
                    
         selectInput("dataset", "Select Dataset:", choice = list.files(pattern = c(".csv"), recursive = TRUE)),         
         selectInput("parameter", "Select the lab parameter:", choices=1),
