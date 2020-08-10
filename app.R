@@ -21,11 +21,11 @@ ui <- fluidPage(
                    
         selectInput("dataset", "Select Dataset:", choice = list.files(pattern = c(".csv"), recursive = TRUE)),         
         selectInput("parameter", "Select the lab parameter:", choices=1),
-        selectInput("sex", "Select the sex:", choices=c("W", "M")), hr(),
+        selectInput("sex", "Select the sex:", choices=c("F", "M")), hr(),
         radioButtons("xlog", "Logarithmic scale for the xaxis:",c("No" = FALSE,"Yes" = TRUE)),
         helpText("
-              ■ Zlog value to the preceding age group", br(),"
-              • Zlog value to the subsequent age group", br(),"
+              ■ Zlog to the preceding age group", br(),"
+              • Zlog to the subsequent age group", br(),"
               ▲ Reference Interval"),
         numericInput("maxzlog", "Maximal Z-Log Value:", 10, min = 1.96, max = 50)
       ),
@@ -36,14 +36,14 @@ ui <- fluidPage(
         tabsetPanel(
           tabPanel("Plot", icon = icon("calculator"),
   
-              p(strong("Z-log values of your Reference Intervals!"), "This Shiny App computes for each lab parameter 
+              p(strong("Zlog values of your Reference Intervals!"), "This Shiny App computes for each lab parameter 
               and each age group the zlog values of the preceding and the subsequent age group (left plot).
-              The zlog-value should be optimally in the middle of the green lines between 1.96 and -1.96. Zlog values above 
+              The zlog value should be optimally in the middle of the green lines between 1.96 and -1.96. Zlog values above 
               4 or -4 should be checked and minimized by adding an additional age group with new calculated reference intervals,
               use the Shiny App AdRI for this. The right plot shows the current used reference intervals. The upper reference limit is in red 
-              and the lower limit in blue. New data must be in .csv2 format and must contain: CODE (Name of the lab parameter), EINHEIT (Unit),
-              SEX, ZEITRAUM (period in year, month, week and day), ALTERVON (begin of the age group), ALTERBIS (end of the age group),
-              NORMVON (Lower Reference Limit) and NORMBIS (Upper Reference Limit)."),
+              and the lower limit in blue. New data must be in CSV-format and must contain: CODE (Name of the lab parameter), LABUNIT (Unit),
+              SEX, UNIT (period in year, month, week and day), AgeFrom (begin of the age group), AgeUntil (end of the age group),
+              LowerLimit (Lower Reference Limit) and UpperLimit (Upper Reference Limit)."),
 
               plotOutput("plot", height = "600px"), verbatimTextOutput("summary2")), 
           
@@ -76,22 +76,22 @@ server <- function(input, output, session) {
     dat.orig <- dat
     
     ### Remove cases where both the lower and upper limits are not specified. 
-    dat <- dat[!is.na(dat$NORMVON) | !is.na(dat$NORMBIS),]
+    dat <- dat[!is.na(dat$LowerLimit) | !is.na(dat$UpperLimit),]
     
     ### Remove cases where the upper limit is 0.
-    dat <- dat[dat$NORMBIS>0,]
+    dat <- dat[dat$UpperLimit>0,]
     
     ### Use only complete cases.
     dat <- dat[complete.cases(dat),]
     
     ### Not needed unless the previous line dat <- dat[complete.cases(dat),] is not applied.
-    dat$NORMBIS[is.na(dat$NORMBIS)] <- maxv.apc
-    dat$NORMVON[is.na(dat$NORMVON) | dat$NORMVON==0] <- minv
+    dat$UpperLimit[is.na(dat$UpperLimit)] <- maxv.apc
+    dat$LowerLimit[is.na(dat$LowerLimit) | dat$LowerLimit==0] <- minv
     
     ### Subset for the men. Note that the reference limits for men and for all are needed.
     datm <- subset(dat,dat$SEX=="M" | dat$SEX=="AL")
     ### Subset for the men. Note that the reference limits for men and for all are needed.
-    datf <- subset(dat,dat$SEX=="W" | dat$SEX=="AL")
+    datf <- subset(dat,dat$SEX=="F" | dat$SEX=="AL")
     
     ### Compute the zlog values of the preceding and subsequent reference limits etc. for men.
     datme <- compute.jumps(datm)
@@ -100,7 +100,7 @@ server <- function(input, output, session) {
     
     ### Check the men or women and use the right dataset for datse
     if(input$sex == "M"){datse <- datme}
-    if(input$sex == "W"){datse <- datfe}
+    if(input$sex == "F"){datse <- datfe}
     
     datse
  })
@@ -138,7 +138,7 @@ server <- function(input, output, session) {
  
   output$plot <- renderPlot({
     
-    datme <<- zlog_data()
+    datme <- zlog_data()
     
     ### Draw the graphs for zlog and original reference limits in one figure.
     par(mfrow=c(1,2))
@@ -160,7 +160,7 @@ server <- function(input, output, session) {
   output$table <- DT::renderDataTable({
     
     datme <- zlog_data()
-    datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, ZEITRAUM = datme$ZEITRAUM, round_df(datme[,seq(7,length(datme))],3))
+    datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, UNIT = datme$UNIT, round_df(datme[,seq(7,length(datme))],3))
     
     DT::datatable(datme, rownames= FALSE, 
                   caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 'Table: Dataset'))

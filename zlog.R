@@ -46,7 +46,7 @@ compute.age <- function(t.unit,n){
 #' The same but reordered data set. The lab parameters remain in the same order. 
 #' But within each lab parameter the order will be increasing in terms of the age groups.
 #'
-#' @param dats Data frame that must contain at least the columns CODE, ZEITRAUM, ALTERVON specifying the name or 
+#' @param dats Data frame that must contain at least the columns CODE, UNIT, AgeFrom specifying the name or 
 #' abbreviation of the lab parameter, the time unit and the starting age of the age group, respectively.
 sort.age.groups <- function(dats){
   dats.new <- dats
@@ -56,7 +56,7 @@ sort.age.groups <- function(dats){
     if (length(inds)>1){
       tps <- rep(0,length(inds))
       for (i in 1:length(tps)){
-        tps[i] <- compute.age(dats$ZEITRAUM[inds[i]],dats$ALTERVON[inds[i]])
+        tps[i] <- compute.age(dats$UNIT[inds[i]],dats$AgeFrom[inds[i]])
       }
       ord <- order(tps)
       for (i in 1:length(tps)){
@@ -83,7 +83,7 @@ sort.age.groups <- function(dats){
 #' max.abs.zlog     The largest absolute values of prev.lower2zlog,prev.upper2zlog,next.lower2zlog and 
 #'                  next.upper2zlog in the corresponding row.
 #'
-#' @param datse A data frame that must contain at least the columns CODE, ZEITRAUM, ALTERVON, NORMVON, NORMBIS specifying the 
+#' @param datse A data frame that must contain at least the columns CODE, UNIT, AgeFrom, LowerLimit, UpperLimit specifying the 
 #' name or abbreviation of the lab parameter, the time unit, the starting age of the age group, and the corresponding lower 
 #' and upper reference limit, respectively. NAs and zero entries are not allowed for the reference limits.
 #' @param sort.by.age.groups Use the function sort.age.groups()
@@ -98,32 +98,32 @@ compute.jumps <- function(datse,sort.by.age.groups=T){
   for (lev in levs){
     inds <- subset(1:nrow(dats),dats$CODE==lev)
     if (length(inds)>1){
-      mat[inds[1],1] <- compute.age(dats$ZEITRAUM[inds[1]],dats$ALTERVON[inds[1]])
+      mat[inds[1],1] <- compute.age(dats$UNIT[inds[1]],dats$AgeFrom[inds[1]])
       
       mat[inds[1],2] <- 0
       mat[inds[1],3] <- 0
-      mat[inds[1],4] <- zlog(dats$NORMVON[inds[2]],L=dats$NORMVON[inds[1]],U=dats$NORMBIS[inds[1]])
-      mat[inds[1],5] <- zlog(dats$NORMBIS[inds[2]],L=dats$NORMVON[inds[1]],U=dats$NORMBIS[inds[1]])
+      mat[inds[1],4] <- zlog(dats$LowerLimit[inds[2]],L=dats$LowerLimit[inds[1]],U=dats$UpperLimit[inds[1]])
+      mat[inds[1],5] <- zlog(dats$UpperLimit[inds[2]],L=dats$LowerLimit[inds[1]],U=dats$UpperLimit[inds[1]])
       
       mat[inds[1],6] <- max(abs(mat[inds[1],2:5]))
       
       if (length(inds)>2){
         for (i in 2:(length(inds)-1)){
-          mat[inds[i],1] <- compute.age(dats$ZEITRAUM[inds[i]],dats$ALTERVON[inds[i]])
+          mat[inds[i],1] <- compute.age(dats$UNIT[inds[i]],dats$AgeFrom[inds[i]])
           
-          mat[inds[i],2] <- zlog(dats$NORMVON[inds[i-1]],L=dats$NORMVON[inds[i]],U=dats$NORMBIS[inds[i]])
-          mat[inds[i],3] <- zlog(dats$NORMBIS[inds[i-1]],L=dats$NORMVON[inds[i]],U=dats$NORMBIS[inds[i]])
-          mat[inds[i],4] <- zlog(dats$NORMVON[inds[i+1]],L=dats$NORMVON[inds[i]],U=dats$NORMBIS[inds[i]])
-          mat[inds[i],5] <- zlog(dats$NORMBIS[inds[i+1]],L=dats$NORMVON[inds[i]],U=dats$NORMBIS[inds[i]])
+          mat[inds[i],2] <- zlog(dats$LowerLimit[inds[i-1]],L=dats$LowerLimit[inds[i]],U=dats$UpperLimit[inds[i]])
+          mat[inds[i],3] <- zlog(dats$UpperLimit[inds[i-1]],L=dats$LowerLimit[inds[i]],U=dats$UpperLimit[inds[i]])
+          mat[inds[i],4] <- zlog(dats$LowerLimit[inds[i+1]],L=dats$LowerLimit[inds[i]],U=dats$UpperLimit[inds[i]])
+          mat[inds[i],5] <- zlog(dats$UpperLimit[inds[i+1]],L=dats$LowerLimit[inds[i]],U=dats$UpperLimit[inds[i]])
           
           mat[inds[i],6] <- max(abs(mat[inds[i],2:5]))
         }
       }
       
-      mat[inds[length(inds)],1] <- compute.age(dats$ZEITRAUM[inds[length(inds)]],dats$ALTERVON[inds[length(inds)]])
+      mat[inds[length(inds)],1] <- compute.age(dats$UNIT[inds[length(inds)]],dats$AgeFrom[inds[length(inds)]])
       
-      mat[inds[length(inds)],2] <- zlog(dats$NORMVON[inds[length(inds)-1]],L=dats$NORMVON[inds[length(inds)]],U=dats$NORMBIS[inds[length(inds)]])
-      mat[inds[length(inds)],3] <- zlog(dats$NORMBIS[inds[length(inds)-1]],L=dats$NORMVON[inds[length(inds)]],U=dats$NORMBIS[inds[length(inds)]])
+      mat[inds[length(inds)],2] <- zlog(dats$LowerLimit[inds[length(inds)-1]],L=dats$LowerLimit[inds[length(inds)]],U=dats$UpperLimit[inds[length(inds)]])
+      mat[inds[length(inds)],3] <- zlog(dats$UpperLimit[inds[length(inds)-1]],L=dats$LowerLimit[inds[length(inds)]],U=dats$UpperLimit[inds[length(inds)]])
       mat[inds[length(inds)],4] <- 0
       mat[inds[length(inds)],5] <- 0
       
@@ -136,7 +136,7 @@ compute.jumps <- function(datse,sort.by.age.groups=T){
 
 #' Generates a plot which either shows the reference limits depending on the age or the zlog values computed by the function compute.jumps.
 #'
-#' @param dats Data frame that must contain at least the columns CODE, NORMVON,NORMBIS and start.time.d specifying 
+#' @param dats Data frame that must contain at least the columns CODE, LowerLimit,UpperLimit and start.time.d specifying 
 #' the name or abbreviation of the lab parameter, the corresponding lower and upper reference limit and start time in days of 
 #' of the corresponding age group, respectively. In addition the the last columns must contain the values zlog values 
 #' prev.lower2zlog, prev.upper2zlog, next.lower2zlog, next.upper2zlog computed by the function compute.jumps. 
@@ -197,8 +197,8 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     abline(qnorm(0.975),b=0,col=col.reflims,lwd=lwd.reflims,lty=lty.reflims)
   
     }else{
-    minv <- min(datinds$NORMVON)
-    maxv <- max(datinds$NORMBIS)
+    minv <- min(datinds$LowerLimit)
+    maxv <- max(datinds$UpperLimit)
     
     plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
          ylim=c(minv,maxv),xlab="Age [days]",ylab=param.code,log=log.scale,cex=cex.pch)
@@ -206,11 +206,11 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
       grid(col="lightgrey", lwd = 0.5)
     }
 
-    points(datinds$start.time.d+offset.x,datinds$NORMVON,pch=17,col=col.lower,cex=cex.pch)
-    points(datinds$start.time.d+offset.x,datinds$NORMVON,col=col.lower,type="l",lwd=lwd.reflims,cex=cex.pch)
+    points(datinds$start.time.d+offset.x,datinds$LowerLimit,pch=17,col=col.lower,cex=cex.pch)
+    points(datinds$start.time.d+offset.x,datinds$LowerLimit,col=col.lower,type="l",lwd=lwd.reflims,cex=cex.pch)
     
-    points(datinds$start.time.d+offset.x,datinds$NORMBIS,pch=17,col=col.upper,cex=cex.pch)
-    points(datinds$start.time.d+offset.x,datinds$NORMBIS,col=col.upper,type="l",lwd=lwd.reflims,cex=cex.pch)
+    points(datinds$start.time.d+offset.x,datinds$UpperLimit,pch=17,col=col.upper,cex=cex.pch)
+    points(datinds$start.time.d+offset.x,datinds$UpperLimit,col=col.upper,type="l",lwd=lwd.reflims,cex=cex.pch)
   }
 }
 
