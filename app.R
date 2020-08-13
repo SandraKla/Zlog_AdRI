@@ -43,7 +43,8 @@ ui <- fluidPage(
               use the Shiny App AdRI for this. The right plot shows the current used reference intervals. The upper reference limit is in red 
               and the lower limit in blue. New data must be in CSV-format and must contain: CODE (Name of the lab parameter), LABUNIT (Unit),
               SEX, UNIT (period in year, month, week and day), AgeFrom (begin of the age group), AgeUntil (end of the age group),
-              LowerLimit (Lower Reference Limit) and UpperLimit (Upper Reference Limit)."),
+              LowerLimit (Lower Reference Limit) and UpperLimit (Upper Reference Limit). If the Lower reference limit is zero,
+              it will be set to 0.001 (in the table in red)."),
 
               plotOutput("plot", height = "600px"), verbatimTextOutput("summary2")), 
           
@@ -67,7 +68,18 @@ server <- function(input, output, session) {
   zlog_data <- reactive({
     
     dat <- read.csv2(file=input$dataset,na.strings="")
-
+    
+    ### Check for upper and lower limit == 0
+    indscri <- subset(1:nrow(dat),dat$LowerLimit==0)
+    levscri <- levels(factor(dat$CODE[indscri]))
+    indscri2 <- subset(1:nrow(dat),dat$UpperLimit==0)
+    levscri2 <- levels(factor(dat$CODE[indscri2]))
+    
+    cat(paste("Caution with these lab parameters! Lower reference limit is zero and will be set to 0.001: \n"))
+    cat(levscri)
+    cat(paste("\n \n Caution with these lab parameters! Upper reference limit is zero and will be set to 0.001: \n"))
+    cat(levscri2)
+    
     ### For replacing missing values. (Not needed if only complete cases are used.)
     minv <- 0.001
     maxv.apc <- 100
@@ -131,7 +143,7 @@ server <- function(input, output, session) {
     levscri <- levels(factor(datse$CODE[indscri]))
     
     ### No. of occurences of large zlog values.
-    cat(paste(sum(datse$max.abs.zlog>abslim, na.rm = TRUE), "Zlog-Values above",abslim,"from this lab parameters: "))
+    cat(paste(sum(datse$max.abs.zlog>abslim, na.rm = TRUE), "Zlog-Values above",abslim,"from this lab parameters: \n "))
     cat(levscri)
   })
   
@@ -163,7 +175,8 @@ server <- function(input, output, session) {
     datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, UNIT = datme$UNIT, round_df(datme[,seq(7,length(datme))],3))
     
     DT::datatable(datme, rownames= FALSE, 
-                  caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 'Table: Dataset'))
+                  caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 'Table: Dataset')) %>%
+    DT:: formatStyle(columns = "LowerLimit", background = styleEqual(0.001, "indianred"))
   })
 }
 
