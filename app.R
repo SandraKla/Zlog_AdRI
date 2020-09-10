@@ -22,12 +22,12 @@ ui <- fluidPage(
         selectInput("dataset", "Select Dataset:", choice = list.files(pattern = c(".csv"), recursive = TRUE)),         
         selectInput("parameter", "Select the lab parameter:", choices=1),
         selectInput("sex", "Select the sex:", choices=c("F", "M")), hr(),
-        radioButtons("xlog", "Logarithmic scale for the xaxis:",c("No" = FALSE,"Yes" = TRUE)),
+        checkboxInput("xlog", "Logarithmic scale for the xaxis", value = FALSE), 
+        numericInput("maxzlog", "Maximal zlog Value:", 10, min = 1.96, max = 50), hr(),
         helpText("
-              ■ Zlog to the preceding age group", br(),"
-              • Zlog to the subsequent age group", br(),"
-              ▲ Reference Interval"),
-        numericInput("maxzlog", "Maximal Z-Log Value:", 10, min = 1.96, max = 50)
+              ■: Zlog to the preceding age group", br(),"
+              •: Zlog to the subsequent age group", br(),"
+              ▲: Reference Interval")
       ),
     
       ################################# Main Panel ################################################
@@ -40,16 +40,17 @@ ui <- fluidPage(
               and each age group the zlog values of the preceding and the subsequent age group (left plot).
               The zlog value should be optimally in the middle of the green lines between 1.96 and -1.96. Zlog values above 
               4 or -4 should be checked and minimized by adding an additional age group with new calculated reference intervals,
-              use the Shiny App AdRI for this. The right plot shows the current used reference intervals. The upper reference limit is in red 
+              (use the Shiny App AdRI for this). The right plot shows the current used reference intervals. The upper reference limit is in red 
               and the lower limit in blue. New data must be in CSV-format and must contain: CODE (Name of the lab parameter), LABUNIT (Unit),
               SEX, UNIT (period in year, month, week and day), AgeFrom (begin of the age group), AgeUntil (end of the age group),
               LowerLimit (Lower Reference Limit) and UpperLimit (Upper Reference Limit). If the Lower reference limit is zero,
               it will be set to 0.001 (in the table in red)."),
 
-              plotOutput("plot", height = "600px"), verbatimTextOutput("summary2")), 
+              plotOutput("plot", height = "600px"), verbatimTextOutput("helptext")), 
           
           tabPanel("Table", icon = icon("table"),  
-                   tabPanel("Table", DT::dataTableOutput("table")), verbatimTextOutput("summary"))
+                   tabPanel("Table", DT::dataTableOutput("table"))) 
+                   #verbatimTextOutput("summary"))
         )
       )
     )
@@ -75,9 +76,9 @@ server <- function(input, output, session) {
     indscri2 <- subset(1:nrow(dat),dat$UpperLimit==0)
     levscri2 <- levels(factor(dat$CODE[indscri2]))
     
-    cat(paste("Caution with these lab parameters! Lower reference limit is zero and will be set to 0.001: \n"))
+    cat(paste("\n Caution with these lab parameters! Lower reference limit is zero and will be set to 0.001: \n"))
     cat(levscri)
-    cat(paste("\n \n Caution with these lab parameters! Upper reference limit is zero and will be set to 0.001: \n"))
+    cat(paste("\n Caution with these lab parameters! Upper reference limit is zero and will be set to 100: \n"))
     cat(levscri2)
     
     ### For replacing missing values. (Not needed if only complete cases are used.)
@@ -129,7 +130,7 @@ server <- function(input, output, session) {
     print(summary(zlog_data()))
   })
  
-  output$summary2 <- renderPrint({
+  output$helptext <- renderPrint({
     
     datse <- zlog_data()
     
@@ -174,7 +175,7 @@ server <- function(input, output, session) {
     datme <- zlog_data()
     datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, UNIT = datme$UNIT, round_df(datme[,seq(7,length(datme))],3))
     
-    DT::datatable(datme, rownames= FALSE, 
+    DT::datatable(datme, rownames= FALSE, options = list(pageLength = 15),
                   caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 'Table: Dataset')) %>%
     DT:: formatStyle(columns = "LowerLimit", background = styleEqual(0.001, "indianred"))
   })
