@@ -22,7 +22,16 @@ ui <- fluidPage(
         selectInput("dataset", "Select Dataset:", choice = list.files(pattern = c(".csv"), recursive = TRUE)),         
         selectInput("parameter", "Select the lab parameter:", choices=1),
         selectInput("sex", "Select the sex:", choices=c("F", "M")), hr(),
-        checkboxInput("xlog", "Logarithmic scale for the xaxis", value = FALSE), 
+        
+        checkboxInput("replacement", "Own Replacement values for reference limits equal to 0", value = FALSE),
+        conditionalPanel(
+          condition = "input.replacement == 1", numericInput("replace_low", "Replacement value for the lower reference limit:", 
+                                                                0.001, min = 0, max = 100)), 
+        conditionalPanel(
+          condition = "input.replacement == 1", numericInput("replace_upper", "Replacement value for the upper reference limit:", 
+                                                                100, min = 0.1, max = 1000)), hr(),
+        
+        checkboxInput("xlog", "Logarithmic scale for the x-axis", value = FALSE), 
         numericInput("maxzlog", "Maximal zlog Value:", 10, min = 1.96, max = 50), hr(),
         helpText("
               ■: Zlog to the preceding age group", br(),"
@@ -82,8 +91,14 @@ server <- function(input, output, session) {
     cat(levscri2)
     
     ### For replacing missing values. (Not needed if only complete cases are used.)
-    minv <- 0.001
-    maxv.apc <- 100
+    
+    if(input$replacement == TRUE){
+      minv <- input$replace_low
+      maxv.apc <- input$replace_upper
+    } 
+    else{
+      minv <- 0.001
+      maxv.apc <- 100}
     
     ### Store the original data set.
     dat.orig <- dat
@@ -148,7 +163,6 @@ server <- function(input, output, session) {
     cat(levscri)
   })
   
- 
   output$plot <- renderPlot({
     
     datme <- zlog_data()
@@ -175,9 +189,17 @@ server <- function(input, output, session) {
     datme <- zlog_data()
     datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, UNIT = datme$UNIT, round_df(datme[,seq(7,length(datme))],3))
     
-    DT::datatable(datme, rownames= FALSE, options = list(pageLength = 15),
-                  caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 'Table: Dataset')) %>%
-    DT:: formatStyle(columns = "LowerLimit", background = styleEqual(0.001, "indianred"))
+    if(input$replacement == TRUE){
+      DT::datatable(datme, rownames= FALSE, options = list(pageLength = 15),
+                    caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 
+                                                      'Table: Dataset with the zlog values')) %>%
+        DT:: formatStyle(columns = "LowerLimit", background = styleEqual(input$replace_low, "indianred"))}
+      
+    else{
+      DT::datatable(datme, rownames= FALSE, options = list(pageLength = 15),
+                    caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 
+                                                      'Table: Dataset with the zlog values')) %>%
+        DT:: formatStyle(columns = "LowerLimit", background = styleEqual(0.001, "indianred"))}
   })
 }
 

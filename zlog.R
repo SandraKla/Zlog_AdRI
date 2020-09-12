@@ -174,8 +174,8 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
   }
   
   if (use.zlog){
-    minv <- min(datinds$prev.lower2zlog, datinds$prev.upper2zlog, datinds$next.lower2zlog, datinds$next.upper2zlog)
-    maxv <- max(datinds$prev.lower2zlog, datinds$prev.upper2zlog, datinds$next.lower2zlog, datinds$next.upper2zlog)
+    minv <- min(datinds$prev.lower2zlog, datinds$prev.upper2zlog, datinds$next.lower2zlog, datinds$next.upper2zlog, na.rm = TRUE)
+    maxv <- max(datinds$prev.lower2zlog, datinds$prev.upper2zlog, datinds$next.lower2zlog, datinds$next.upper2zlog, na.rm = TRUE)
     
     plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
          ylim=c(minv,maxv),xlab="Age [days]",ylab="zlog",log=log.scale,cex=cex.pch)
