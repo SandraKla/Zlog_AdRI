@@ -1,6 +1,12 @@
-####################################### Scripts ###################################################
+####################################### WELCOME TO THE SHINY APP ##################################
+####################################### from Sandra Klawitter (2020) ##############################
+###################################################################################################
+
+
+####################################### Load Script and Example-Dataset ###########################
 
 source("zlog.R")
+dataset_original <<- read.csv2("data/CALIPER.csv",na.strings="")
 
 ####################################### Libraries #################################################
 
@@ -13,71 +19,132 @@ if("DT" %in% rownames(installed.packages())){
 ui <- fluidPage(
   
   theme = "style.css",
-  
-    sidebarLayout(
+
+    titlePanel(h3("Consistency check for Age-dependent Reference Intervals"), windowTitle = "Zlog"),
+    
+      sidebarLayout(
       
-      ################################# Sidebar ###################################################
-      sidebarPanel(width = 2, h4(strong("Consistency check"),"for Age-dependent Reference Intervals"), hr(),
-                   
-        selectInput("dataset", "Select Dataset:", choice = list.files(pattern = c(".csv"), recursive = TRUE)),         
-        selectInput("parameter", "Select the lab parameter:", choices=1),
-        selectInput("sex", "Select the sex:", choices=c("F", "M")), hr(),
+          ############################# Sidebar ###################################################
+          sidebarPanel(width = 3,
+            
+            fileInput("data_table", "Upload CSV File:", accept = c(
+                      "text/csv",
+                      "text/comma-separated-values,text/plain",
+                      ".csv")),
+            
+            checkboxInput("replacement", "Replacement values for reference limits", value = FALSE),
+            conditionalPanel(
+              condition = "input.replacement == 1", 
+              numericInput("replace_low", "Replacement value for the lower reference limit:", 
+                           0.001, min = 0, max = 100)), 
+            conditionalPanel(
+              condition = "input.replacement == 1", 
+              numericInput("replace_upper", "Replacement value for the upper reference limit:", 
+                           100, min = 0.1, max = 1000)),
         
-        checkboxInput("replacement", "Own Replacement values for reference limits equal to 0", value = FALSE),
-        conditionalPanel(
-          condition = "input.replacement == 1", numericInput("replace_low", "Replacement value for the lower reference limit:", 
-                                                                0.001, min = 0, max = 100)), 
-        conditionalPanel(
-          condition = "input.replacement == 1", numericInput("replace_upper", "Replacement value for the upper reference limit:", 
-                                                                100, min = 0.1, max = 1000)), hr(),
-        
-        checkboxInput("xlog", "Logarithmic scale for the x-axis", value = FALSE), 
-        numericInput("maxzlog", "Maximal zlog Value:", 10, min = 1.96, max = 50), hr(),
-        helpText("
-              ■: Zlog to the preceding age group", br(),"
-              •: Zlog to the subsequent age group", br(),"
-              ▲: Reference Interval")
-      ),
+            selectInput("sex", "Select the sex:", choices=c("Female"="F", "Male"="M")),
+            selectInput("parameter", "Select the lab parameter:", choices = dataset_original$CODE),
+            checkboxInput("xlog", "Logarithmic scale for the x-axis", value = FALSE), hr(),
+            
+            helpText("Legend: zlog to the preceding age group (square), zlog to the subsequent 
+                     age group (circle), original reference intervals (triangle), 
+                     Lower Reference Limit (blue) and Upper Reference Limit (red)"),
+            downloadLink("download_data", "Download the Data Table with the zlog values"), hr(),
+            numericInput("maxzlog", "Maximum zlog value:", 10, min = 1.96, max = 50)
+        ),
     
       ################################# Main Panel ################################################
-      mainPanel(width = 10,
-      
-        tabsetPanel(
-          tabPanel("Plot", icon = icon("calculator"),
-  
-              p(strong("Zlog values of your Reference Intervals!"), "This Shiny App computes for each lab parameter 
-              and each age group the zlog values of the preceding and the subsequent age group (left plot).
-              The zlog value should be optimally in the middle of the green lines between 1.96 and -1.96. Zlog values above 
-              4 or -4 should be checked and minimized by adding an additional age group with new calculated reference intervals,
-              (use the Shiny App AdRI for this). The right plot shows the current used reference intervals. The upper reference limit is in red 
-              and the lower limit in blue. New data must be in CSV-format and must contain: CODE (Name of the lab parameter), LABUNIT (Unit),
-              SEX, UNIT (period in year, month, week and day), AgeFrom (begin of the age group), AgeUntil (end of the age group),
-              LowerLimit (Lower Reference Limit) and UpperLimit (Upper Reference Limit). If the Lower reference limit is zero,
-              it will be set to 0.001 (in the table in red)."),
+      mainPanel(width = 9,
 
-              plotOutput("plot", height = "600px"), verbatimTextOutput("helptext")), 
+        tabsetPanel(type = "pills",
           
-          tabPanel("Table", icon = icon("table"),  
-                   tabPanel("Table", DT::dataTableOutput("table"))) 
-                   #verbatimTextOutput("summary"))
-        )
+          tabPanel("Home", icon = icon("home"),            
+
+            p(style = "background-color:#A9A9A9;", 
+
+              "This Shiny App computes for each lab parameter 
+              and each age group the zlog values of the preceding and the subsequent age group.
+              The zlog value should be optimally between -1.96 and 1.96. Zlog values above 
+              -4 or 4 should be checked and minimized by adding an additional age group with new 
+              calculated reference intervals. New data must be in CSV-format and must contain:",
+              br(), br(), "CODE: Name of the lab parameter", br(), "LABUNIT: Unit of the lab parameter", br(),
+              "SEX: M for male and F for female", br(), "UNIT: Unit of the age range in year, month, week or day", br(), 
+              "AgeFrom: Begin of the age group", br(), "AgeUntil: End of the age group", br(), 
+              "LowerLimit: Lower Reference Limit", br(), "UpperLimit: Upper Reference Limit", br(), br(),
+              "If the lower or upper reference limit is zero, it will be set with the replacement
+              value (default 0.001 or 100)."),  hr(),
+            
+            htmlOutput("caution"), 
+            hr(), htmlOutput("helptext")
+          ),
+          
+          tabPanel("Table", icon = icon("table"), 
+            
+            p(style = "background-color:#A9A9A9;", 
+                     
+              "The table shows the zlog values. Zlog values under -1.96 in blue and above 1.96 in orange.
+              The zlog value should be optimally between 1.96 and -1.96 in white. The replacement values 
+              are in blue and red under the columns LowerLimit and UpperLimit." ),       
+                   
+            DT::dataTableOutput("table")),
+          
+          tabPanel("Plot", icon = icon("calculator"), 
+            
+            p(style = "background-color:#A9A9A9;", 
+
+              "The first plot shows the current used reference intervals. 
+              The upper reference limit is in red and the lower limit in blue.
+              The second plot shows for the selected lab parameter and each age group the zlog values 
+              of the preceding and the subsequent age group. The zlog value should be optimally in the 
+              middle of the green lines between 1.96 and -1.96. Zlog values above 
+              4 or -4 should be checked and minimized by adding an additional age group 
+              with new calculated reference intervals."),
+            
+            plotOutput("plot", height = "650px")
+        ) 
       )
     )
   )
+)
   
 
 ####################################### Server ####################################################
 
 server <- function(input, output, session) {
   
+  options(shiny.plot.res=128)
   options(shiny.sanitize.errors = TRUE)
   
   ##################################### Reactive Expressions ######################################
   
-  # Create the table with the zlog values as reactive expression 
-  zlog_data <- reactive({
-    
-    dat <- read.csv2(file=input$dataset,na.strings="")
+  get_data_file <- reactive({
+
+    saving <- 
+      if(!is.null(input$data_table)){
+        dataset_original <<- read.csv2(input$data_table[["datapath"]],na.strings="")
+      }else{
+        dataset_original <<- read.csv2("data/CALIPER.csv",na.strings="")
+      }
+    return(dataset_original)
+  })
+
+  data_caution <- reactive({
+  
+    dat <- get_data_file()
+    validate(need(ncol(dat) == 8, 
+                  "Check whether you have used the correct template!"))
+
+    if(input$replacement == TRUE){
+      
+      minv <- input$replace_low
+      maxv.apc <- input$replace_upper
+      
+      validate(need(minv > 0, ""))
+      validate(need(maxv.apc > 0, ""))
+    } 
+    else{
+      minv <- 0.001
+      maxv.apc <- 100}
     
     ### Check for upper and lower limit == 0
     indscri <- subset(1:nrow(dat),dat$LowerLimit==0)
@@ -85,16 +152,30 @@ server <- function(input, output, session) {
     indscri2 <- subset(1:nrow(dat),dat$UpperLimit==0)
     levscri2 <- levels(factor(dat$CODE[indscri2]))
     
-    cat(paste("\n Caution with these lab parameters! Lower reference limit is zero and will be set to 0.001: \n"))
-    cat(levscri)
-    cat(paste("\n Caution with these lab parameters! Upper reference limit is zero and will be set to 100: \n"))
-    cat(levscri2)
+    text <- HTML(paste("<p>",  "Caution with these lab parameters! 
+                       The lower reference limit is zero and will be set to", minv ," for",
+                       toString(levscri), ". And the upper reference limit is zero and will be set to", 
+                       maxv.apc ,"for", toString(levscri2),".</p>"))
+    text
+  })
+  
+  
+  # Create the table with the zlog values as reactive expression 
+  zlog_data <- reactive({
     
-    ### For replacing missing values. (Not needed if only complete cases are used.)
+    dat <- get_data_file()
+    
+    validate(need(ncol(dat) == 8, 
+                  "Check whether you have used the correct template!"))
     
     if(input$replacement == TRUE){
+      
+      # to prevent possible error messages because of the slow typing
       minv <- input$replace_low
       maxv.apc <- input$replace_upper
+      
+      validate(need(minv > 0, ""))
+      validate(need(maxv.apc > 0, ""))
     } 
     else{
       minv <- 0.001
@@ -107,13 +188,15 @@ server <- function(input, output, session) {
     dat <- dat[!is.na(dat$LowerLimit) | !is.na(dat$UpperLimit),]
     
     ### Remove cases where the upper limit is 0.
-    dat <- dat[dat$UpperLimit>0,]
+    # dat <- dat[dat$UpperLimit>0,]
     
     ### Use only complete cases.
     dat <- dat[complete.cases(dat),]
     
+    ### For replacing missing values. (Not needed if only complete cases are used.)
+    
     ### Not needed unless the previous line dat <- dat[complete.cases(dat),] is not applied.
-    dat$UpperLimit[is.na(dat$UpperLimit)] <- maxv.apc
+    dat$UpperLimit[is.na(dat$UpperLimit) | dat$UpperLimit==0] <- maxv.apc
     dat$LowerLimit[is.na(dat$LowerLimit) | dat$LowerLimit==0] <- minv
     
     ### Subset for the men. Note that the reference limits for men and for all are needed.
@@ -132,20 +215,16 @@ server <- function(input, output, session) {
     
     datse
  })
+
+  ##################################### Observe Events ############################################
   
-  observeEvent(input$dataset, {
+  observeEvent(input$data_table, {
     updateSelectInput(session, "parameter", choices = zlog_data()[,1])
- })
+  })
   
   ##################################### Output ####################################################
-  
-  output$summary <- renderPrint({
-   
-    datse <- zlog_data()
-    print(summary(zlog_data()))
-  })
- 
-  output$helptext <- renderPrint({
+
+  helptext <- reactive({
     
     datse <- zlog_data()
     
@@ -159,16 +238,22 @@ server <- function(input, output, session) {
     levscri <- levels(factor(datse$CODE[indscri]))
     
     ### No. of occurences of large zlog values.
-    cat(paste(sum(datse$max.abs.zlog>abslim, na.rm = TRUE), "Zlog-Values above",abslim,"from this lab parameters: \n "))
-    cat(levscri)
+    text <- HTML(paste("<p>", sum(datse$max.abs.zlog>abslim, na.rm = TRUE), "zlog values above", abslim,
+               "from this lab parameters:", toString(levscri), "</p>"))
+    text
   })
+  
+  
+  output$caution <- renderUI({ data_caution() })
+ 
+  output$helptext <- renderUI({ helptext() })
   
   output$plot <- renderPlot({
     
     datme <- zlog_data()
     
     ### Draw the graphs for zlog and original reference limits in one figure.
-    par(mfrow=c(1,2))
+    par(mfrow=c(2,1), mai=c(0.95,0.95,0.15,0.15))
     
     ### Draw the graphs for the given lab parameter
     lab.param <- input$parameter
@@ -180,28 +265,48 @@ server <- function(input, output, session) {
     xlog_ <- input$xlog
     
     # Draw the plots
-    draw.time.dependent.lims(datme,lab.param,lwd.reflims=2,xlog=xlog_)
     draw.time.dependent.lims(datme,lab.param,use.zlog=F,lwd.reflims=2,xlog=xlog_)
+    draw.time.dependent.lims(datme,lab.param,lwd.reflims=2,xlog=xlog_)
   })
 
   output$table <- DT::renderDataTable({
     
     datme <- zlog_data()
-    datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, UNIT = datme$UNIT, round_df(datme[,seq(7,length(datme))],3))
+    datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, UNIT = datme$UNIT, 
+                        round_df(datme[,seq(7,length(datme))],3))
+    
+    colnames(datme) <- c("Code", "Sex", "Unit", "Lower Limit", "Upper Limit", "Age", "Prev.lower zlog",
+                          "Prev.upper zlog", "Next.lower zlog", "Next.upper zlog", "Max zlog")
     
     if(input$replacement == TRUE){
-      DT::datatable(datme, rownames= FALSE, options = list(pageLength = 15),
+      DT::datatable(datme, rownames= FALSE, options = list(pageLength = 15, autoWidth = TRUE),
                     caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 
                                                       'Table: Dataset with the zlog values')) %>%
-        DT:: formatStyle(columns = "LowerLimit", background = styleEqual(input$replace_low, "indianred"))}
+        #DT:: formatStyle(columns = "Lower Limit", background = styleEqual(input$replace_low, "indianred")) %>%
+        #DT:: formatStyle(columns = "Upper Limit", background = styleEqual(input$replace_upper, "cornflowerblue"))%>%
+        DT:: formatStyle(columns = colnames(datme[,c(seq(7,10))]), 
+                         backgroundColor = styleInterval(c(-1.9601,0,1.9601), 
+                                                         c("cornflowerblue","white","white","coral")))}
       
     else{
-      DT::datatable(datme, rownames= FALSE, options = list(pageLength = 15),
+      DT::datatable(datme, rownames= FALSE, options = list(pageLength = 15, autoWidth = TRUE),
                     caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 
                                                       'Table: Dataset with the zlog values')) %>%
-        DT:: formatStyle(columns = "LowerLimit", background = styleEqual(0.001, "indianred"))}
+        #DT:: formatStyle(columns = "Lower Limit", background = styleEqual(0.001, "indianred"))%>%
+        #DT:: formatStyle(columns = "Upper Limit", background = styleEqual(100, "cornflowerblue"))%>%
+        DT:: formatStyle(columns = colnames(datme[,c(seq(7,10))]), 
+                         backgroundColor = styleInterval(c(-1.9601,0,1.9601), 
+                                                         c("cornflowerblue","white","white","coral")))}
   })
-}
 
+
+  output$download_data <- downloadHandler(
+    filename = function(){
+      paste0("Table_Zlog.csv")
+    },
+    content = function(file) {
+      write.csv(zlog_data(), file, row.names = FALSE)
+    })
+}
 ####################################### Run the application #######################################
 shinyApp(ui = ui, server = server)
