@@ -1,8 +1,8 @@
 ###################################################################################################
-######################### Script for the computing the Z-Log value ################################
+######################### Script for the computing the zlog value #################################
 ###################################################################################################
 
-#' Computes the zlog value of x given the lower und upper reference limits L and U, respectively.
+#' Computes the zlog value of x given the lower und upper reference limits L and U
 #'
 #' @param x value
 #' @param L lower refernce limit
@@ -21,10 +21,11 @@ zlog <- function(x,L=0,U=0){
 }
 
 
-#' Computes the age in days given the time unit and the age in the corresponding time unit.
+#' Computes the age in days given the time unit and the age in the corresponding time unit
 #'
-#' @param t.unit The specified time unit as a string. The value of t.unit can be day, week, month or year and 
-#' the corresponding German terms Tag, Woche,  Monat and Jahr.
+#' @param t.unit The specified time unit as a string. 
+#' The value of t.unit can be day, week, month or year and 
+#' the corresponding German terms Tag, Woche, Monat and Jahr.
 #' @param n age
 compute.age <- function(t.unit,n){
   if (t.unit=="Tag" | t.unit=="day"){
@@ -46,8 +47,8 @@ compute.age <- function(t.unit,n){
 #' The same but reordered data set. The lab parameters remain in the same order. 
 #' But within each lab parameter the order will be increasing in terms of the age groups.
 #'
-#' @param dats Data frame that must contain at least the columns CODE, UNIT, AgeFrom specifying the name or 
-#' abbreviation of the lab parameter, the time unit and the starting age of the age group, respectively.
+#' @param dats Data frame that must contain at least the columns:
+#' CODE, LABUNIT, SEX, UNIT, AgeFrom, AgeUntil, LowerLimit and UpperLimit
 sort.age.groups <- function(dats){
   dats.new <- dats
   levs <- levels(factor(dats$CODE))
@@ -158,7 +159,7 @@ compute.jumps <- function(datse,sort.by.age.groups=T){
 #' @param cex.pch The size from the zlog values
 draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
                                      pch.prev=15, pch.next=16, col.lower="cornflowerblue", col.upper="indianred", grid.col = T,
-                                     lty.reflims=2, col.reflims="seagreen", lwd.reflims=1, xlog=F, ylog=F, cex.pch = 1.5){
+                                     lty.reflims=2, col.reflims="seagreen", lwd.reflims=1, xlog=F, ylog=F, cex.pch = 2){
   
   inds <- subset(1:nrow(dats),dats$CODE==param.code)
   datinds <- dats[inds,]
@@ -207,11 +208,19 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     }
 
     points(datinds$start.time.d+offset.x,datinds$LowerLimit,pch=17,col=col.lower,cex=cex.pch)
-    points(datinds$start.time.d+offset.x,datinds$LowerLimit,col=col.lower,type="l",lwd=lwd.reflims,cex=cex.pch)
+    #points(datinds$start.time.d+offset.x,datinds$LowerLimit,col=col.lower,type="p",lwd=lwd.reflims,cex=cex.pch)
+    
+    x <- datinds$start.time.d+offset.x
+    y <- datinds$LowerLimit
+    segments(x[-length(x)],y[-length(x)],x[-1],y[-length(x)])
     
     points(datinds$start.time.d+offset.x,datinds$UpperLimit,pch=17,col=col.upper,cex=cex.pch)
-    points(datinds$start.time.d+offset.x,datinds$UpperLimit,col=col.upper,type="l",lwd=lwd.reflims,cex=cex.pch)
-  }
+    #points(datinds$start.time.d+offset.x,datinds$UpperLimit,col=col.upper,type="s",lwd=lwd.reflims,cex=cex.pch)
+  
+    x <- datinds$start.time.d+offset.x
+    y <- datinds$UpperLimit
+    segments(x[-length(x)],y[-length(x)],x[-1],y[-length(x)])
+    }
 }
 
 #' Round numeric values from a dataframe
