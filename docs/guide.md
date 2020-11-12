@@ -44,10 +44,11 @@ With the help of the table, find high zlog values and the appropriate laboratory
 
 This Shiny App computes for each lab parameter and each age group the zlog values of the preceding and the subsequent age group. This shows the left plot. The zlog value should be optimally in the middle of the green lines between 1.96 and -1.96. Zlog values above 4 or -4 should be checked and minimized by adding an additional age group with new calculated reference intervals. The right plot shows the current used reference intervals. The upper reference limit is in red and the lower limit in blue. 
 
+<img src="shiny.png" align="center"/>
+
 <br> Legend: </br>
 
 * ■ Zlog to the preceding age group
 * • Zlog to the subsequent age group
 * ▲ stands for the reference intervals
 
-<img src="shiny.png" align="center"/>
