@@ -1,5 +1,3 @@
-# **Shiny App for Consistency check for age-dependent reference intervals!**
-
 * [Home](./index.md)
 * [Installation](./install.md)
 * [Guide](./guide.md)

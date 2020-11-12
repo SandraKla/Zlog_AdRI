@@ -1,5 +1,3 @@
-# **Shiny App for Consistency check for age-dependent reference intervals!**
-
 * [Home](./index.md)
 * [Installation](./install.md)
 * [Guide](./guide.md)
@@ -26,4 +24,5 @@ Or use the function ```runGitHub()``` from the package *shiny*:
 library(shiny)
 runGitHub("Zlog_AdRI", "SandraKla")
 ```
-The package "DT" is downloaded or imported when starting this app. For more information about the required packages, see [About](./about.md).
+
+The package *DT* is downloaded or imported when starting this app. For more information about the required packages, see [About](./about.md).
