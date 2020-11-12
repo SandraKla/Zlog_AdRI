@@ -45,12 +45,8 @@ ui <- fluidPage(
             selectInput("sex", "Select the sex:", choices=c("Female"="F", "Male"="M")),
             selectInput("parameter", "Select the lab parameter:", choices = dataset_original$CODE),
             checkboxInput("xlog", "Logarithmic scale for the x-axis", value = FALSE), hr(),
-            
-            helpText("Legend: zlog to the preceding age group (square), zlog to the subsequent 
-                     age group (circle), original reference intervals (triangle), 
-                     Lower Reference Limit (blue) and Upper Reference Limit (red)"),
-            downloadLink("download_data", "Download the Data Table with the zlog values"), hr(),
-            numericInput("maxzlog", "Maximum zlog value:", 10, min = 1.96, max = 50)
+            numericInput("maxzlog", "Maximum zlog value:", 10, min = 1.96, max = 50), hr(),
+            downloadLink("download_data", "Download the Data Table with the zlog values")
         ),
     
       ################################# Main Panel ################################################
@@ -62,9 +58,8 @@ ui <- fluidPage(
 
             p(style = "background-color:#A9A9A9;", 
 
-              "This Shiny App computes for each lab parameter 
-              and each age group the zlog values of the preceding and the subsequent age group.
-              The zlog value should be optimally between -1.96 and 1.96. Zlog values above 
+              "This Shiny App computes for each lab parameter the zlog values of the preceding 
+              and the subsequent age group. The zlog value should be optimally between -1.96 and 1.96. Zlog values above 
               -4 or 4 should be checked and minimized by adding an additional age group with new 
               calculated reference intervals. New data must be in CSV-format and must contain:",
               br(), br(), "CODE: Name of the lab parameter", br(), "LABUNIT: Unit of the lab parameter", br(),
@@ -83,8 +78,7 @@ ui <- fluidPage(
             p(style = "background-color:#A9A9A9;", 
                      
               "The table shows the zlog values. Zlog values under -1.96 in blue and above 1.96 in orange.
-              The zlog value should be optimally between 1.96 and -1.96 in white. The replacement values 
-              are in blue and red under the columns LowerLimit and UpperLimit." ),       
+              The zlog value should be optimally between 1.96 and -1.96 in white." ),       
                    
             DT::dataTableOutput("table")),
           
@@ -98,7 +92,8 @@ ui <- fluidPage(
               of the preceding and the subsequent age group. The zlog value should be optimally in the 
               middle of the green lines between 1.96 and -1.96. Zlog values above 
               4 or -4 should be checked and minimized by adding an additional age group 
-              with new calculated reference intervals."),
+              with new calculated reference intervals. Legend: zlog to the preceding age group (square), zlog to the subsequent 
+              age group (circle), original reference intervals (triangle)."),
             
             plotOutput("plot", height = "650px")
         ) 
