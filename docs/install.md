@@ -5,20 +5,23 @@
 
 ## Installation 
 
-Download the Zip-File from this Shiny App and set your working direction to this path and run:
+**Method 1:**
+Download the Zip-File this Shiny App. Unzip the file and set your working direction to the path of the folder. 
+The package [shiny](https://cran.r-project.org/web/packages/shiny/index.html) (≥ 1.4.0) must be installed before using the Shiny App:
 
 ```bash
 # Test if shiny is installed:
 if("shiny" %in% rownames(installed.packages())){
-  library(shiny)} else{
+  library(shiny)} 
+else{
   install.packages("shiny")}
 ```
-
+And then start the app with the following code:
 ```bash
-library(shiny)
 runApp("app.R")
 ```
-Or use the function ```runGitHub()``` from the package *shiny*:
+**Method 2:**
+Use the function ```runGitHub()``` from the package [shiny](https://cran.r-project.org/web/packages/shiny/index.html):
 
 ```bash
 library(shiny)
