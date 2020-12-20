@@ -1,40 +1,47 @@
-# Shiny App for Consistency check for age-dependent reference intervals!
+# Shiny App for Plausibility Checks of Reference Interval Limits!
 
 <img src="www/Logo.svg" width="225px" height="150px" align="right"/>
 
-This Shiny App computes the zlog values of the preceding and the subsequent reference interval for different analytes for each age group, see the [Wiki](https://github.com/SandraKla/Zlog_AdRI/wiki). 
-
-Many medical reference intervals are not age-dependent and have large jumps between the individual age groups. This should be prevented by considering the zlog value. If the zlog value deviates significantly from -1.96 to 1.96, the reference intervals and the age groups should possibly be renewed to obtain age-dependent reference intervals!
+This Shiny App computes the zlog values of the preceding and the subsequent reference interval for different analytes for each age group. Many medical reference intervals are not age-dependent and have large jumps between the individual age groups. This should be prevented by considering the zlog value. The lower reference limits (LL) and upper reference limits (UL) can transform any result x into a zlog value using the following equation: <img src="https://render.githubusercontent.com/render/math?math={zlog=(log(x) - \frac{log(UG) %2B log(OG)}{2}}) * \frac{3.92}{log(OG) - log(UG)}" align="center">. If the zlog value deviates significantly from -1.96 to 1.96, the reference intervals and the age groups should possibly be renewed to obtain age-dependent reference intervals!
 
 <img src="docs/shiny.png" align="center"/>
 
+*Link to the publication: A Tool for Plausibility Checks of Reference Interval Limits*
+
 ## Installation 
 
-Download the Zip-File from this Shiny App and set your working direction to this path and run:
+**Method 1:**
+Download the Zip-File this Shiny App. Unzip the file and set your working direction to the path of the folder. 
+The package [shiny](https://cran.r-project.org/web/packages/shiny/index.html) (≥ 1.4.0) must be installed before using the Shiny App:
 
 ```bash
 # Test if shiny is installed:
 if("shiny" %in% rownames(installed.packages())){
-  library(shiny)} else{
+  library(shiny)} 
+else{
   install.packages("shiny")}
 ```
-
+And then start the app with the following code:
 ```bash
-library(shiny)
 runApp("app.R")
 ```
-Or use the function ```runGitHub()``` from the package *shiny*:
+**Method 2:**
+Use the function ```runGitHub()``` from the package [shiny](https://cran.r-project.org/web/packages/shiny/index.html):
 
 ```bash
 library(shiny)
 runGitHub("Zlog_AdRI", "SandraKla")
 ```
 
-The package *DT* is downloaded or imported when starting this app. For more information about the required versions use the [Wiki](https://github.com/SandraKla/Zlog_AdRI/wiki).
+The package [DT](https://cran.r-project.org/web/packages/DT/index.html) (≥ 0.13) is downloaded or imported when starting this app. The used [R](https://www.r-project.org)-Version must be ≥ 3.6.1.
 
-## Example
+## Data
 
-The [CALIPER](https://caliper.research.sickkids.ca/#/) dataset with age-dependent reference intervals has been implemented into this Shiny App. For this purpose, the data was brought into the appropriate shape for the analysis from the [supplemental table](https://academic.oup.com/clinchem/article/58/5/854/5620695#supplementary-data) from Age-Specific and Sex-Specific Pediatric Reference Intervals for 40 Biochemical Markers. For new data use the CALIPER-Dataset as [template](https://github.com/SandraKla/Zlog_AdRI/blob/master/data/CALIPER.csv) with the columns:
+### Preloaded dataset
+The [CALIPER](https://caliper.research.sickkids.ca/#/)-Dataset with age-dependent reference intervals has been preloaded into this Shiny App. For this purpose, the data was brought into the appropriate shape for the analysis from the [Supplemental Table](https://academic.oup.com/clinchem/article/58/5/854/5620695#supplementary-data) from the publication: *Age-Specific and Sex-Specific Pediatric Reference Intervals for 40 Biochemical Markers*. 
+
+### New data
+For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/blob/master/data/CALIPER.csv) as template with the columns: 
 
 * **CODE**: Name of the analyte ("Calcium") 
 * **LABUNIT**: Unit of the analyte ("mmol/L")
@@ -43,6 +50,6 @@ The [CALIPER](https://caliper.research.sickkids.ca/#/) dataset with age-dependen
 * **AgeFrom**: Start of the age range 
 * **AgeUntil**: End of the age range 
 * **LowerLimit**: Start of the reference interval (LL)
-* **UpperLimit** Start of the reference interval (UL)
+* **UpperLimit**: Start of the reference interval (UL)
 
-For more informations use the [Homepage](https://sandrakla.github.io/Zlog_AdRI/guide.html)!
+Please contact me under the email address _sandrakla97@web.de_ if you have any questions or problems. For more informations use the [Homepage](https://sandrakla.github.io/Zlog_AdRI/guide.html)! 
