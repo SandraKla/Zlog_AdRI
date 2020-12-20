@@ -12,4 +12,4 @@ If the zlog value deviates significantly from -1.96 to 1.96, the reference inter
 
 *Link to the publication: A Tool for Plausibility Checks of Reference Interval Limits*
 
-<img src="docs/shiny.png" align="center"/>
+<img src="shiny.png" align="center"/>
