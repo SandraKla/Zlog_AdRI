@@ -21,7 +21,7 @@ For new data use the CALIPER-Dataset(https://github.com/SandraKla/Zlog_AdRI/blob
 * **LowerLimit**: Start of the reference interval (LL)
 * **UpperLimit**: Start of the reference interval (UL)
 
-The data must be in CSV-format.
+The data must be in CSV-format (sep = "," and dec = ".").
 
 <img src="data_format.png" align="center"/>
 
@@ -37,6 +37,11 @@ The data must be in CSV-format.
 4.	Select the lab parameter
 5.	Select the logarithmic scale for the x-axis
 6.	Select the maximum zlog value for quick determination of very high zlog values
+
+<p float="left">
+  <img src="shiny_high_zlog.png" align="center" style="width:300px;"/>
+</p>
+
 7.	Download the data with the zlog values
 
 ### Table with zlog values
