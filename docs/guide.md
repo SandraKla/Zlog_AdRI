@@ -10,7 +10,7 @@ The [CALIPER](https://caliper.research.sickkids.ca/#/)-Dataset with age-dependen
 ## Guide
 ### Load new data 
 
-For new data use the CALIPER-Dataset(https://github.com/SandraKla/Zlog_AdRI/blob/master/data/CALIPER.csv) as template with the columns:
+For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/blob/master/data/CALIPER.csv) as template with the columns:
 
 * **CODE**: Name of the analyte ("Calcium") 
 * **LABUNIT**: Unit of the analyte ("mmol/L")
@@ -46,7 +46,7 @@ The data must be in CSV-format (sep = "," and dec = ".").
 
 ### Table with zlog values
 
-With the help of the table, find high zlog values and the appropriate laboratory parameters. These can be visualized in step 3. The table shows the zlog values. Zlog values under -1.96 in blue and above 1.96 in orange. The zlog value should be optimally between 1.96 and -1.96 in white.
+With the help of the table, find high zlog values and the appropriate laboratory parameters. These can be visualized in step 3. The table shows the zlog values. Zlog values under -1.96 in blue and above 1.96 in orange/red. The zlog value should be optimally between 1.96 and -1.96 in white.
 
 <img src="table.png" align="center"/>
 
