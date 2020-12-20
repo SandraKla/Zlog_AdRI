@@ -39,13 +39,13 @@ The data must be in CSV-format.
 6.	Select the maximum zlog value for quick determination of very high zlog values
 7.	Download the data with the zlog values
 
-### Step 2) Table
+### Table with zlog values
 
 With the help of the table, find high zlog values and the appropriate laboratory parameters. These can be visualized in step 3. The table shows the zlog values. Zlog values under -1.96 in blue and above 1.96 in orange. The zlog value should be optimally between 1.96 and -1.96 in white.
 
 <img src="table.png" align="center"/>
 
-### Step 3) Plot 
+### Plot with zlog values 
 
 This Shiny App computes for each lab parameter and each age group the zlog values of the preceding and the subsequent age group. This shows the left plot. The zlog value should be optimally in the middle of the green lines between 1.96 and -1.96. Zlog values above 4 or -4 should be checked and minimized by adding an additional age group with new calculated reference intervals. The right plot shows the current used reference intervals. The upper reference limit is in red and the lower limit in blue. 
 
