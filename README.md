@@ -54,6 +54,8 @@ For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/bl
 * **LowerLimit**: Start of the reference interval (LL)
 * **UpperLimit**: Start of the reference interval (UL)
 
+## Contact
+
 Please contact me under the email address _sandrakla97@web.de_ if you have any questions or problems. For more informations use the [Homepage](https://sandrakla.github.io/Zlog_AdRI/guide.html)! 
 
 *Link to the publication: A Tool for Plausibility Checks of Reference Interval Limits*
