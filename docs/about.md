@@ -3,6 +3,8 @@
 * [Guide](./guide.md)
 * [About](./about.md)
 
+---
+
 ## Versions 
 
 * [R](https://www.r-project.org): ≥ 3.6.1 
