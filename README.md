@@ -19,9 +19,7 @@ The package [shiny](https://cran.r-project.org/web/packages/shiny/index.html) (â
 ```bash
 # Test if shiny is installed:
 if("shiny" %in% rownames(installed.packages())){
-  library(shiny)} 
-else{
-  install.packages("shiny")}
+  library(shiny)} else{install.packages("shiny")}
 ```
 And then start the app with the following code:
 ```bash
