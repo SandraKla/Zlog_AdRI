@@ -26,7 +26,7 @@ runApp("app.R")
 In RStudio with installed [shiny](https://cran.r-project.org/web/packages/shiny/index.html) use the Run App-Button:
 
 <p float="left">
-  <img src="shiny_button.png" align="center" style="width:300px;"/>
+  <img src="shiny_button.png"/>
 </p>
 
 ```
