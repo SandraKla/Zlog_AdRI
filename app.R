@@ -317,7 +317,15 @@ server <- function(input, output, session) {
       paste0("Table_Zlog.csv")
     },
     content = function(file) {
-      write.csv(zlog_data(), file, row.names = FALSE)
+      
+      datme <- zlog_data()
+      datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, UNIT = datme$UNIT, 
+                          round_df(datme[,seq(7,length(datme))],3))
+      
+      colnames(datme) <- c("Code", "Sex", "Unit", "Lower Limit", "Upper Limit", "Age", "Prev.lower zlog",
+                           "Prev.upper zlog", "Next.lower zlog", "Next.upper zlog", "Max zlog")
+      
+      write.csv(datme, file, row.names = FALSE)
     })
 }
 ####################################### Run the application #######################################
