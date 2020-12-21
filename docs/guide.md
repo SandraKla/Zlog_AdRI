@@ -25,20 +25,22 @@ The data must be in CSV-format (sep = "," and dec = ".").
 <img src="setting.png" align="center" style="width:300px;"/>
 
 1)	Upload the CSV File with own reference intervals 
+
 2)	Replacement values: If the lower reference limit is zero, it will be set to 0.001 and the upper reference limit to 100 or by own given reference limits.
 
 <img src="shiny_replace.png" align="center" style="width:300px;"/>
 
 3)	Select the sex
+
 4)	Select the lab parameter
+
 5)	Select if the x-axis should be logarithmic
+
 6)	Select the maximum zlog value for quick determination of very high zlog values
 
 <img src="shiny_high_zlog.png" align="center" style="width:300px;"/>
 
 7)	Download the data with the zlog values (only when opened in the browser)
-
-<img src="shiny_browser.png" align="center" style="width:300px;"/>
 
 ### Table with zlog values
 
