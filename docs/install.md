@@ -21,6 +21,7 @@ else{
 And then start the app with the following code:
 ```bash
 runApp("app.R")
+```
 
 In RStudio with installed [shiny](https://cran.r-project.org/web/packages/shiny/index.html) use the Run App-Button:
 
