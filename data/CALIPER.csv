@@ -9,7 +9,7 @@ Direct Bilirubin,µmol/L,M,day,15,365,0.8,5.2
 Direct Bilirubin,µmol/L,M,year,1,9,0.8,3.4
 Direct Bilirubin,µmol/L,M,year,9,13,0.8,5
 Direct Bilirubin,µmol/L,M,year,13,19,1.9,7.1
-Total Bilirubin,µmol/L,F,day,0,4,3.3,283.8
+Total Bilirubin,µmol/L,F,day,0,14,3.3,283.8
 Total Bilirubin,µmol/L,F,day,15,365,0.8,11.7
 Total Bilirubin,µmol/L,F,year,1,9,0.8,6.8
 Total Bilirubin,µmol/L,F,year,9,12,0.8,9.4
@@ -35,8 +35,8 @@ Carbon Dioxide ,mmol/L,M,day,15,365,10,24
 Carbon Dioxide ,mmol/L,M,year,1,5,14,24
 Carbon Dioxide ,mmol/L,M,year,5,15,17,26
 Carbon Dioxide ,mmol/L,M,year,15,19,18,28
-Creatinine (Enzymatic),µmol/L,F,year,0,14,29,82
-Creatinine (Enzymatic),µmol/L,F,day,15,2,9,32
+Creatinine (Enzymatic),µmol/L,F,day,0,14,29,82
+Creatinine (Enzymatic),µmol/L,F,day,15,730,9,32
 Creatinine (Enzymatic),µmol/L,F,year,2,5,18,38
 Creatinine (Enzymatic),µmol/L,F,year,5,12,27,54
 Creatinine (Enzymatic),µmol/L,F,year,12,15,40,72
@@ -93,14 +93,14 @@ Urea,mmol/L,M,day,0,14,1,8.2
 Urea,mmol/L,M,day,15,365,1.2,6
 Urea,mmol/L,M,year,1,10,3.2,7.9
 Urea,mmol/L,M,year,10,19,2.6,7.5
-Uric Acid ,mmol/L,F,day,0,14,1,8.2
-Uric Acid ,mmol/L,F,day,15,365,1.2,6
-Uric Acid ,mmol/L,F,year,1,10,3.2,7.9
-Uric Acid ,mmol/L,F,year,10,19,2.6,6.8
-Uric Acid ,mmol/L,M,day,0,14,1,8.2
-Uric Acid ,mmol/L,M,day,15,365,1.2,6
-Uric Acid ,mmol/L,M,year,1,10,3.2,7.9
-Uric Acid ,mmol/L,M,year,10,19,2.6,7.5
+Uric Acid,µmol/L,F,day,0,14,164,757
+Uric Acid,µmol/L,F,day,15,365,94,377
+Uric Acid,µmol/L,F,year,1,12,106,289
+Uric Acid,µmol/L,F,year,12,19,153,349
+Uric Acid,µmol/L,M,day,0,14,164,757
+Uric Acid,µmol/L,M,day,15,365,94,377
+Uric Acid,µmol/L,M,year,1,12,106,289
+Uric Acid,µmol/L,M,year,12,19,156,454
 Alkaline Phosphatase,U/L,F,day,0,14,90,273
 Alkaline Phosphatase,U/L,F,day,15,365,134,518
 Alkaline Phosphatase,U/L,F,year,1,10,156,369
@@ -128,11 +128,11 @@ Alanine Aminotransferase (ALT ACT),U/L,M,year,0,1,5,51
 Alanine Aminotransferase (ALT ACT),U/L,M,year,1,13,11,30
 Alanine Aminotransferase (ALT ACT),U/L,M,year,13,19,10,33
 Amylase,U/L,F,day,0,14,3,10
-Amylase,U/L,F,day,2,13,2,22
+Amylase,U/L,F,week,2,13,2,22
 Amylase,U/L,F,week,13,52,3,50
 Amylase,U/L,F,year,1,19,25,101
 Amylase,U/L,M,day,0,14,3,10
-Amylase,U/L,M,day,2,13,2,22
+Amylase,U/L,M,week,2,13,2,22
 Amylase,U/L,M,week,13,52,3,50
 Amylase,U/L,M,year,1,19,25,101
 Aspartate Aminotransferase (AST),U/L,F,day,0,14,32,162
@@ -172,14 +172,14 @@ Gamma-Glutamyl Transferase,U/L,M,day,15,365,8,127
 Gamma-Glutamyl Transferase,U/L,M,year,1,11,6,16
 Gamma-Glutamyl Transferase,U/L,M,year,11,19,7,21
 Lactate Dehydrogenase,U/L,F,day,0,14,309,1222
-Lactate Dehydrogenase,U/L,F,day,15,1,163,452
+Lactate Dehydrogenase,U/L,F,day,15,365,163,452
 Lactate Dehydrogenase,U/L,F,year,1,10,192,321
-Lactate Dehydrogenase,U/L,F,year,19,15,157,272
+Lactate Dehydrogenase,U/L,F,year,10,15,157,272
 Lactate Dehydrogenase,U/L,F,year,15,19,130,250
 Lactate Dehydrogenase,U/L,M,day,0,14,309,1222
-Lactate Dehydrogenase,U/L,M,day,15,1,163,452
+Lactate Dehydrogenase,U/L,M,day,15,365,163,452
 Lactate Dehydrogenase,U/L,M,year,1,10,192,321
-Lactate Dehydrogenase,U/L,M,year,19,15,170,283
+Lactate Dehydrogenase,U/L,M,year,10,15,170,283
 Lactate Dehydrogenase,U/L,M,year,15,19,130,250
 Lipase,U/L,F,year,0,19,4,39
 Lipase,U/L,M,year,0,19,4,39
@@ -216,44 +216,44 @@ Direct HDL-Cholesterol ,mmol/L,M,year,1,4,0.84,1.63
 Direct HDL-Cholesterol ,mmol/L,M,year,4,13,0.92,1.88
 Direct HDL-Cholesterol ,mmol/L,M,year,13,19,0.82,1.77
 Triglycerides,mmol/L,F,day,0,14,0.93,2.93
-Triglycerides,mmol/L,F,day,15,1,0.6,2.92
+Triglycerides,mmol/L,F,day,15,365,0.6,2.92
 Triglycerides,mmol/L,F,year,1,19,0.5,2.23
 Triglycerides,mmol/L,M,day,0,14,0.93,2.93
-Triglycerides,mmol/L,M,day,15,1,0.6,2.92
+Triglycerides,mmol/L,M,day,15,365,0.6,2.92
 Triglycerides,mmol/L,M,year,1,19,0.5,2.23
 Albumin G ,g/L,F,day,0,14,33,45
-Albumin G ,g/L,F,day,15,1,28,47
+Albumin G ,g/L,F,day,15,365,28,47
 Albumin G ,g/L,F,year,1,8,38,47
 Albumin G ,g/L,F,year,8,15,41,48
 Albumin G ,g/L,F,year,15,19,40,49
 Albumin G ,g/L,M,day,0,14,33,45
-Albumin G ,g/L,M,day,15,1,28,47
+Albumin G ,g/L,M,day,15,365,28,47
 Albumin G ,g/L,M,year,1,8,38,47
 Albumin G ,g/L,M,year,8,15,41,48
 Albumin G ,g/L,M,year,15,19,41,51
 Albumin P,g/L,F,day,0,14,28,41
-Albumin P,g/L,F,day,15,1,25,46
+Albumin P,g/L,F,day,15,365,25,46
 Albumin P,g/L,F,year,1,8,35,45
 Albumin P,g/L,F,year,8,15,37,47
 Albumin P,g/L,F,year,15,19,35,49
 Albumin P,g/L,M,day,0,14,28,41
-Albumin P,g/L,M,day,15,1,25,46
+Albumin P,g/L,M,day,15,365,25,46
 Albumin P,g/L,M,year,1,8,35,45
 Albumin P,g/L,M,year,8,15,37,47
 Albumin P,g/L,M,year,15,19,38,50
 Antistreptolysin-O,IU/mL,F,month,0,6,0,0
-Antistreptolysin-O,IU/mL,F,month,6,1,0,30
+Antistreptolysin-O,IU/mL,F,month,6,12,0,30
 Antistreptolysin-O,IU/mL,F,year,1,6,0,104
 Antistreptolysin-O,IU/mL,F,year,6,19,0,331
 Antistreptolysin-O,IU/mL,M,month,0,6,0,0
-Antistreptolysin-O,IU/mL,M,month,6,1,0,30
+Antistreptolysin-O,IU/mL,M,month,6,12,0,30
 Antistreptolysin-O,IU/mL,M,year,1,6,0,104
 Antistreptolysin-O,IU/mL,M,year,6,19,0,331
 Complement C3,g/L,F,day,0,14,0.5,1.21
-Complement C3,g/L,F,day,15,1,0.51,1.6
+Complement C3,g/L,F,day,15,365,0.51,1.6
 Complement C3,g/L,F,year,1,19,0.83,1.52
 Complement C3,g/L,M,day,0,14,0.5,1.21
-Complement C3,g/L,M,day,15,1,0.51,1.6
+Complement C3,g/L,M,day,15,365,0.51,1.6
 Complement C3,g/L,M,year,1,19,0.83,1.52
 Complement C4,g/L,F,year,0,1,0.07,0.3
 Complement C4,g/L,F,year,1,19,0.13,0.37
@@ -266,11 +266,11 @@ C-reactive protein - High Sensitivity,mg/L,M,day,0,14,0.3,6.1
 C-reactive protein - High Sensitivity,mg/L,M,day,15,5475,0.1,1
 C-reactive protein - High Sensitivity,mg/L,M,year,15,19,0.1,1.7
 Haptoglobin,g/L,F,day,0,14,0,0.1
-Haptoglobin,g/L,F,day,15,1,0.07,2.21
+Haptoglobin,g/L,F,day,15,365,0.07,2.21
 Haptoglobin,g/L,F,year,1,12,0.07,1.63
 Haptoglobin,g/L,F,year,12,19,0.07,1.79
 Haptoglobin,g/L,M,day,0,14,0,0.1
-Haptoglobin,g/L,M,day,15,1,0.07,2.21
+Haptoglobin,g/L,M,day,15,365,0.07,2.21
 Haptoglobin,g/L,M,year,1,12,0.07,1.63
 Haptoglobin,g/L,M,year,12,19,0.07,1.79
 Immunoglobulin A,g/L,F,year,0,1,0,0.3
@@ -302,24 +302,28 @@ Immunoglobulin M,g/L,M,week,2,13,0.1,0.7
 Immunoglobulin M,g/L,M,week,13,52,0.2,0.9
 Immunoglobulin M,g/L,M,year,1,19,0.4,1.5
 Prealbumin,g/L,F,day,0,14,0.02,0.12
-Prealbumin,g/L,F,day,15,1,0.05,0.24
+Prealbumin,g/L,F,day,15,365,0.05,0.24
 Prealbumin,g/L,F,year,1,5,0.12,0.23
 Prealbumin,g/L,F,year,5,13,0.14,0.26
 Prealbumin,g/L,F,year,13,16,0.18,0.31
 Prealbumin,g/L,F,year,16,19,0.17,0.33
 Prealbumin,g/L,M,day,0,14,0.02,0.12
-Prealbumin,g/L,M,day,15,1,0.05,0.24
+Prealbumin,g/L,M,day,15,365,0.05,0.24
 Prealbumin,g/L,M,year,1,5,0.12,0.23
 Prealbumin,g/L,M,year,5,13,0.14,0.26
 Prealbumin,g/L,M,year,13,16,0.18,0.31
 Prealbumin,g/L,M,year,16,19,0.2,0.35
+Rheumatoid Factor, IU/mL,F,day,0,14,9,17.1
+Rheumatoid Factor, IU/mL,F,day,15,365,9,9
+Rheumatoid Factor, IU/mL,M,day,0,14,9,17.1
+Rheumatoid Factor, IU/mL,M,day,15,365,9,9
 Total Protein,g/L,F,day,0,14,53,83
-Total Protein,g/L,F,day,15,1,44,71
+Total Protein,g/L,F,day,15,365,44,71
 Total Protein,g/L,F,year,1,6,61,75
 Total Protein,g/L,F,year,6,9,64,77
 Total Protein,g/L,F,year,9,19,65,81
 Total Protein,g/L,M,day,0,14,53,83
-Total Protein,g/L,M,day,15,1,44,71
+Total Protein,g/L,M,day,15,365,44,71
 Total Protein,g/L,M,year,1,6,61,75
 Total Protein,g/L,M,year,6,9,64,77
 Total Protein,g/L,M,year,9,19,65,81
