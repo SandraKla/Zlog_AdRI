@@ -5,6 +5,8 @@
 
 ---
 
+Guide as PDF: [Workflow.pdf](https://github.com/SandraKla/Zlog_AdRI/raw/master/docs/Workflow.pdf)
+
 ### Load new data 
 
 For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/blob/master/data/CALIPER.csv) as template with the columns:
