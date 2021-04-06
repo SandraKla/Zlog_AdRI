@@ -10,6 +10,8 @@ If the zlog value deviates significantly from -1.96 to 1.96, the reference inter
 <p>&nbsp</p>
 <img src="docs/shiny.png" align="center"/>
 
+Guide as PDF: [Workflow.pdf](https://github.com/SandraKla/Zlog_AdRI/raw/master/docs/Workflow.pdf)
+
 ## Installation 
 
 **Method 1:**
