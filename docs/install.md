@@ -1,7 +1,4 @@
-* [Home](./index.md)
-* [Installation](./install.md)
-* [Guide](./guide.md)
-* [About](./about.md)
+[Home](./index.md) - [Installation](./install.md) - [Guide](./guide.md) - [About](./about.md)
 
 ---
 

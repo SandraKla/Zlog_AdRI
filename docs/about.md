@@ -1,15 +1,12 @@
-* [Home](./index.md)
-* [Installation](./install.md)
-* [Guide](./guide.md)
-* [About](./about.md)
+[Home](./index.md) - [Installation](./install.md) - [Guide](./guide.md) - [About](./about.md)
 
 ---
 
 ## Versions 
 
-* [R](https://www.r-project.org): ≥ 3.6.1 
-* [DT](https://cran.r-project.org/web/packages/DT/index.html): ≥ 0.13
-* [shiny](https://cran.r-project.org/web/packages/shiny/index.html): ≥ 1.4.0
+* [R](https://www.r-project.org) ≥ 3.6.1 
+* [DT](https://cran.r-project.org/web/packages/DT/index.html) ≥ 0.13
+* [shiny](https://cran.r-project.org/web/packages/shiny/index.html) ≥ 1.4.0
 
 ## Contact
 
