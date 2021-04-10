@@ -185,19 +185,20 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     }
     for (i in 1:nrow(datinds)){
       if (i<nrow(datinds)){
-        points(datinds$start.time.d[i]+offset.x,datinds$next.lower2zlog[i],pch=pch.next,col=col.lower,cex=cex.pch)
-        points(datinds$start.time.d[i]+offset.x,datinds$next.upper2zlog[i],pch=pch.next,col=col.upper,cex=cex.pch)
+        points(datinds$start.time.d[i]+offset.x,datinds$next.lower2zlog[i],pch= "\u25BA",col=col.lower,cex=cex.pch)
+        points(datinds$start.time.d[i]+offset.x,datinds$next.upper2zlog[i],pch= "\u25BA",col=col.upper,cex=cex.pch)
       }
       if (i>1){
-        points(datinds$start.time.d[i]+offset.x,datinds$prev.lower2zlog[i],pch=pch.prev,col=col.lower,cex=cex.pch)
-        points(datinds$start.time.d[i]+offset.x,datinds$prev.upper2zlog[i],pch=pch.prev,col=col.upper,cex=cex.pch)
+        points(datinds$start.time.d[i]+offset.x,datinds$prev.lower2zlog[i],pch= "\U25C4",col=col.lower,cex=cex.pch)
+        points(datinds$start.time.d[i]+offset.x,datinds$prev.upper2zlog[i],pch= "\U25C4",col=col.upper,cex=cex.pch)
       }
     }
     # Plot the green lines between -1.96 and 1.96
     abline(qnorm(0.025),b=0,col=col.reflims,lwd=lwd.reflims,lty=lty.reflims)
     abline(qnorm(0.975),b=0,col=col.reflims,lwd=lwd.reflims,lty=lty.reflims)
   
-    }else{
+    }
+  else{
     minv <- min(datinds$LowerLimit)
     maxv <- max(datinds$UpperLimit)
     
@@ -207,20 +208,43 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
       grid(col="lightgrey", lwd = 0.5)
     }
 
-    points(datinds$start.time.d+offset.x,datinds$LowerLimit,pch=17,col=col.lower,cex=cex.pch)
+    points(datinds$start.time.d+offset.x,datinds$LowerLimit,pch=24,col=col.lower, bg = col.lower, cex=cex.pch)
     #points(datinds$start.time.d+offset.x,datinds$LowerLimit,col=col.lower,type="p",lwd=lwd.reflims,cex=cex.pch)
     
-    x <- datinds$start.time.d+offset.x
-    y <- datinds$LowerLimit
-    segments(x[-length(x)],y[-length(x)],x[-1],y[-length(x)])
+    x_lower <- datinds$start.time.d+offset.x
+    y_lower <- datinds$LowerLimit
     
-    points(datinds$start.time.d+offset.x,datinds$UpperLimit,pch=17,col=col.upper,cex=cex.pch)
+    segments(x_lower[-length(x_lower)],y_lower[-length(x_lower)],x_lower[-1],y_lower[-length(x_lower)])
+    lowerlimit <- data.frame(x = x_lower, y = y_lower)
+    
+    points(datinds$start.time.d+offset.x,datinds$UpperLimit,pch=25,col=col.upper, bg = col.upper, cex=cex.pch)
     #points(datinds$start.time.d+offset.x,datinds$UpperLimit,col=col.upper,type="s",lwd=lwd.reflims,cex=cex.pch)
   
-    x <- datinds$start.time.d+offset.x
-    y <- datinds$UpperLimit
-    segments(x[-length(x)],y[-length(x)],x[-1],y[-length(x)])
+    x_upper <- datinds$start.time.d+offset.x
+    y_upper <- datinds$UpperLimit
+
+    segments(x_upper[-length(x_upper)],y_upper[-length(x_upper)],x_upper[-1],y_upper[-length(x_upper)])
+    upperlimit <- data.frame(x = x_upper, y = y_upper)
+    
+    for (i in 1: (nrow(lowerlimit)-1)){
+      
+      age <- c(lowerlimit$x[i+1], lowerlimit$x[i], lowerlimit$x[i], lowerlimit$x[i+1])
+      age[1] <- age[1]-1
+      age[4] <- age[4]-1
+      
+      if(xlog){
+        age <- c(lowerlimit$x[i+1], lowerlimit$x[i], lowerlimit$x[i], lowerlimit$x[i+1])
+      }
+      
+      lowerlimit_polygon <- c(lowerlimit$y[i], lowerlimit$y[i])
+      upperlimit_polygon <- c(upperlimit$y[i], upperlimit$y[i])
+      if(length(lowerlimit_polygon > 1)){
+        polygon(age, c(upperlimit_polygon[2], upperlimit_polygon[1], 
+                       lowerlimit_polygon[1], lowerlimit_polygon[2]), 
+                col = rgb(red = 0 , green = 0, blue = 0, alpha = 0.25), border = NA)
+      }
     }
+  }
 }
 
 #' Round numeric values from a dataframe
@@ -263,4 +287,32 @@ zlogcolor <- function(x, hex = TRUE,
           return(rgb(R, G, B, max = 255)),
           return(c(R, G, B)))
   
+}
+
+#' Get the zlog value and check if the background is to dark and change the textcolor to white
+#' 
+#' Returns a color between blue via white to red (HEX or RGB)
+#' 
+#' @param x Expects a (zlog) value x
+#' @param threshold Given threshold for the zlog value
+#' @param background Variable to decide id the color affects the background or the text
+highzlogvalues <- function(x, hex = TRUE, threshold = 8, background = FALSE){
+
+  if(!background){
+    G = sapply(x, function(x) ifelse(x < -threshold, 255, 0))
+    R = sapply(x, function(x) ifelse(x < -threshold, 255, 0))
+    B = sapply(x, function(x) ifelse(x < -threshold, 255, 0))
+  } else{
+    G = sapply(x, function(x) ifelse(x > threshold, 192, 255))
+    R = sapply(x, function(x) ifelse(x > threshold, 192, 255))
+    B = sapply(x, function(x) ifelse(x > threshold, 192, 255))
+  }
+  
+  R[is.na(R)] <- 0
+  B[is.na(B)] <- 0
+  G[is.na(G)] <- 0
+  
+  ifelse (hex,
+          return(rgb(R, G, B, max = 255)),
+          return(c(R, G, B)))
 }
