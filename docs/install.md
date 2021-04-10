@@ -24,7 +24,6 @@ In RStudio with installed [shiny](https://cran.r-project.org/web/packages/shiny/
   <img src="shiny_button.png"/>
 </p>
 
-```
 **Method 2:**
 Use the function ```runGitHub()``` from the package [shiny](https://cran.r-project.org/web/packages/shiny/index.html):
 
