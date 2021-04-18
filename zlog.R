@@ -163,6 +163,7 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
   
   inds <- subset(1:nrow(dats),dats$CODE==param.code)
   datinds <- dats[inds,]
+  unit.param <- datinds$LABUNIT[1]
   offset.x <- 0
   log.scale <- ""
   
@@ -203,7 +204,7 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     maxv <- max(datinds$UpperLimit)
     
     plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
-         ylim=c(minv,maxv),xlab="Age [days]",ylab=param.code,log=log.scale,cex=cex.pch)
+         ylim=c(minv,maxv),xlab="Age [days]",ylab=paste(param.code,"in", unit.param),log=log.scale,cex=cex.pch)
     if (!is.null(grid.col)){
       grid(col="lightgrey", lwd = 0.5)
     }
@@ -229,8 +230,6 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     for (i in 1: (nrow(lowerlimit)-1)){
       
       age <- c(lowerlimit$x[i+1], lowerlimit$x[i], lowerlimit$x[i], lowerlimit$x[i+1])
-      age[1] <- age[1]-1
-      age[4] <- age[4]-1
       
       if(xlog){
         age <- c(lowerlimit$x[i+1], lowerlimit$x[i], lowerlimit$x[i], lowerlimit$x[i+1])
@@ -244,6 +243,7 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
                 col = rgb(red = 0 , green = 0, blue = 0, alpha = 0.25), border = NA)
       }
     }
+    
   }
 }
 

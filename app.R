@@ -45,7 +45,15 @@ ui <- fluidPage(
               numericInput("replace_upper", "Replacement value for the upper reference limit:", 
                            100, min = 0.1, max = 1000)), 
             
-            selectInput("sex", "Select the sex:", choices = c("Female (F)"="F", "Male (M)"="M", "All (AL)"="B")), hr(),
+            conditionalPanel(
+              condition = "input.tabselected == 'Table'", 
+              selectInput("sex", "Select the sex:", choices = c("All (AL)"="B", "Female (F)"="F", "Male (M)"="M"))),
+            
+            conditionalPanel(
+              condition = "input.tabselected == 'Plot'", 
+              selectInput("sex_plot", "Select the sex:", choices = c("Female (F)"="F", "Male (M)"="M"))),
+            
+            hr(),
         
             helpText("Settings for the plot:"),
             selectInput("parameter", "Select the lab parameter:", choices = dataset_original$CODE, 
@@ -59,9 +67,9 @@ ui <- fluidPage(
       ################################# Main Panel ################################################
       mainPanel(width = 9,
 
-        tabsetPanel(type = "pills",
+        tabsetPanel(type = "pills", id = "tabselected", 
           
-          tabPanel("Table", icon = icon("table"),           
+          tabPanel("Table", icon = icon("table"),        
 
             p(style = "background-color:#A9A9A9;", 
 
@@ -77,7 +85,7 @@ ui <- fluidPage(
             DT::dataTableOutput("table")),
             #htmlOutput("caution")),
           
-          tabPanel("Plot", icon = icon("calculator"), 
+          tabPanel("Plot", icon = icon("calculator"),
             
             p(style = "background-color:#A9A9A9;", 
 
@@ -201,9 +209,16 @@ server <- function(input, output, session) {
     datbe <- compute.jumps(datb)
     
     ### Check the men or women and use the right dataset for datse
-    if(input$sex == "M"){datse <- datme}
-    if(input$sex == "F"){datse <- datfe}
-    if(input$sex == "B"){datse <- datbe}
+    
+    if(input$tabselected == "Table"){
+      if(input$sex == "M"){datse <- datme}
+      if(input$sex == "F"){datse <- datfe}
+      if(input$sex == "B"){datse <- datbe}
+    }
+    if(input$tabselected == "Plot"){
+      if(input$sex_plot == "M"){datse <- datme}
+      if(input$sex_plot == "F"){datse <- datfe}
+    }
     
     datse
  })
@@ -253,6 +268,7 @@ server <- function(input, output, session) {
   output$plot <- renderPlot({
     
     datme <- zlog_data()
+    #cairo_ps(file = "Figure1.eps", onefile = FALSE, fallback_resolution = 1200)
     
     ### Draw the graphs for zlog and original reference limits in one figure.
     par(mfrow=c(2,1), mai=c(0.95,0.95,0.15,0.15))
@@ -267,8 +283,9 @@ server <- function(input, output, session) {
     xlog_ <- input$xlog
     
     # Draw the plots
-    draw.time.dependent.lims(datme,lab.param,use.zlog=F,lwd.reflims=2,xlog=xlog_)
-    draw.time.dependent.lims(datme,lab.param,lwd.reflims=2,xlog=xlog_)
+    draw.time.dependent.lims(datme,lab.param, use.zlog=F,lwd.reflims=2,xlog=xlog_)
+    draw.time.dependent.lims(datme,lab.param, lwd.reflims=2,xlog=xlog_)
+    #dev.off()
   })
 
   output$table <- DT::renderDataTable({
