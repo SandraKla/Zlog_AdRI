@@ -41,9 +41,7 @@ The data must be in CSV-format (sep = "," and dec = ".").
 
 ### Table with zlog values
 
-The table shows the zlog values. Zlog values under -1.96 are in blue and above 1.96 in orange/red. The zlog value should be optimally between 1.96 and -1.96 in white.
-
-<img src="table.png" align="center"/>
+The table shows the zlog values. Max. abs. zlog values above 1.96 are in orange/red. The zlog value should be optimally between 1.96 and -1.96.
 
 The table shows following informations:
 
@@ -58,6 +56,6 @@ The table shows following informations:
 
 ### Plot with zlog values 
 
-This Shiny App computes for each lab parameter and each age group the zlog values of the preceding and the subsequent age group. The first plot shows the currently used reference intervals. The upper reference limit is in red and the lower limit in blue. The second plot shows for the selected lab parameter and each age group the zlog values of the preceding and the subsequent age group (Legend: zlog to the preceding age group (Triangle with the point to the left), zlog to the subsequent age group (preceding)). The zlog values should be optimally in the middle of the green lines between 1.96 and -1.96.
+This Shiny App computes for each lab parameter and each age group the zlog values of the preceding and the subsequent age group. The first plot shows the currently used reference intervals. The upper reference limit is in red and the lower limit in blue. The second plot shows for the selected lab parameter and each age group the zlog values of the preceding and the subsequent age group (Legend: zlog to the preceding age group (Triangle with the point to the right), zlog to the subsequent age group (preceding)). The zlog values should be optimally in the middle of the green lines between 1.96 and -1.96.
 
 <img src="shiny.png" align="center"/>
