@@ -75,7 +75,6 @@ ui <- fluidPage(
 
               "This Shiny App computes the zlog values of the preceding 
               and the subsequent age group for each lab parameter. 
-              Zlog values far below -1.96 are in blue and far above 1.96 in red. 
               The zlog value should be optimally between -1.96 and 1.96 and values above 
               -4 or 4 should be checked and minimized by adding an additional age group with new 
               calculated reference intervals. For further information please visit our", 
@@ -93,8 +92,8 @@ ui <- fluidPage(
               The upper reference limit is in red and the lower limit in blue.
               The second plot shows for the selected lab parameter and each age group the zlog 
               values of the preceding and the subsequent age group (Legend: 
-              zlog to the preceding age group (Triangle with the point to the left), 
-              zlog to the subsequent age group (Triangle with the point to the right))."),
+              zlog to the preceding age group (Triangle with the point to the right), 
+              zlog to the subsequent age group (Triangle with the point to the left))."),
             
             plotOutput("plot", height = "700px")
         ) 
@@ -293,42 +292,62 @@ server <- function(input, output, session) {
     datme <- zlog_data()
     datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, #UNIT = datme$UNIT, 
                         round_df(datme[,seq(7,length(datme))],3))
+    datme$start.time.d <- NULL
+    colnames(datme) <- c("Code", "Sex", "Lower Limit", "Upper Limit", "Prev.lower zlog",
+                         "Prev.upper zlog", "Next.lower zlog", "Next.upper zlog", "Max.abs.zlog")
 
-    colnames(datme) <- c("Code", "Sex", "Lower Limit", "Upper Limit", "Age in days", "Prev.lower zlog",
-                          "Prev.upper zlog", "Next.lower zlog", "Next.upper zlog", "Max. abs. zlog")
-
+    options(htmlwidgets.TOJSON_ARGS = list(na = 'string'))
+     
+    # if(input$replacement == TRUE){
+    #   DT::datatable(datme, rownames= FALSE, extensions = 'Buttons',
+    #                 options = list(dom = 'Blfrtip', pageLength = 15, buttons = c('copy', 'csv', 'pdf', 'print')),
+    #                 caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 
+    #                                                   'Table: Dataset with the zlog values')) %>%
+    #     DT:: formatStyle(columns = "Prev.lower zlog", color = styleEqual(datme[,5], highzlogvalues(c(datme[,5]))),
+    #                      backgroundColor =  styleEqual(datme[,5], zlogcolor(c(datme[,5])))) %>%
+    #     DT:: formatStyle(columns = "Prev.upper zlog", color = styleEqual(datme[,6], highzlogvalues(c(datme[,6]))),
+    #                      backgroundColor =  styleEqual(datme[,6], zlogcolor(c(datme[,6])))) %>%
+    #     DT:: formatStyle(columns = "Next.lower zlog", color = styleEqual(datme[,7], highzlogvalues(c(datme[,7]))),
+    #                      backgroundColor =  styleEqual(datme[,7], zlogcolor(c(datme[,7])))) %>%
+    #     DT:: formatStyle(columns = "Next.upper zlog", color = styleEqual(datme[,8], highzlogvalues(c(datme[,8]))),
+    #                      backgroundColor =  styleEqual(datme[,8], zlogcolor(c(datme[,8])))) %>%
+    #     DT:: formatStyle(columns = "Max.abs.zlog", color = styleEqual(datme[,9], highzlogvalues(c(datme[,9]))),
+    #                      backgroundColor =  styleEqual(datme[,9], zlogcolor(c(datme[,9]))))
+    #   
+    # }
+    # else{
+    #   DT::datatable(datme, rownames= FALSE, extensions = 'Buttons',
+    #                 options = list(dom = 'Blfrtip', pageLength = 15, buttons = c('copy', 'csv', 'pdf', 'print')),
+    #                 caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 
+    #                                                   'Table: Dataset with the zlog values')) %>%
+    #     DT:: formatStyle(columns = "Prev.lower zlog", color =  styleEqual(datme[,5], highzlogvalues(c(datme[,5]))),
+    #                      backgroundColor =  styleEqual(datme[,5], zlogcolor(c(datme[,5])))) %>%
+    #     DT:: formatStyle(columns = "Prev.upper zlog", color =  styleEqual(datme[,6], highzlogvalues(c(datme[,6]))),
+    #                      backgroundColor =  styleEqual(datme[,6], zlogcolor(c(datme[,6])))) %>%
+    #     DT:: formatStyle(columns = "Next.lower zlog", color =  styleEqual(datme[,7], highzlogvalues(c(datme[,7]))),
+    #                      backgroundColor =  styleEqual(datme[,7], zlogcolor(c(datme[,7])))) %>%
+    #     DT:: formatStyle(columns = "Next.upper zlog", color =  styleEqual(datme[,8], highzlogvalues(c(datme[,8]))),
+    #                      backgroundColor =  styleEqual(datme[,8], zlogcolor(c(datme[,8])))) %>%
+    #     DT:: formatStyle(columns = "Max.abs.zlog",color = styleEqual(datme[,9], highzlogvalues(c(datme[,9]))),
+    #                      backgroundColor =  styleEqual(datme[,9], zlogcolor(c(datme[,9]))))
+    #     }
+    
     if(input$replacement == TRUE){
       DT::datatable(datme, rownames= FALSE, extensions = 'Buttons',
                     options = list(dom = 'Blfrtip', pageLength = 15, buttons = c('copy', 'csv', 'pdf', 'print')),
-                    caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 
+                    caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;',
                                                       'Table: Dataset with the zlog values')) %>%
-        DT:: formatStyle(columns = "Prev.lower zlog", color = styleEqual(datme[,6], highzlogvalues(c(datme[,6]))),
-                         backgroundColor =  styleEqual(datme[,6], zlogcolor(c(datme[,6])))) %>%
-        DT:: formatStyle(columns = "Prev.upper zlog", color = styleEqual(datme[,7], highzlogvalues(c(datme[,7]))),
-                         backgroundColor =  styleEqual(datme[,7], zlogcolor(c(datme[,7])))) %>%
-        DT:: formatStyle(columns = "Next.lower zlog", color = styleEqual(datme[,8], highzlogvalues(c(datme[,8]))),
-                         backgroundColor =  styleEqual(datme[,8], zlogcolor(c(datme[,8])))) %>%
-        DT:: formatStyle(columns = "Next.upper zlog", color = styleEqual(datme[,9], highzlogvalues(c(datme[,9]))),
-                         backgroundColor =  styleEqual(datme[,9], zlogcolor(c(datme[,9])))) %>%
-        DT:: formatStyle(columns = "Max. abs. zlog", backgroundColor =  
-                           styleEqual(datme[,10], highzlogvalues(c(datme[,10]), threshold = input$maxzlog, background = TRUE))) 
-      
+        DT:: formatStyle(columns = "Max.abs.zlog", color = styleEqual(datme[,9], highzlogvalues(c(datme[,9]))),
+                         backgroundColor =  styleEqual(datme[,9], zlogcolor(c(datme[,9]))))
+
     }
     else{
       DT::datatable(datme, rownames= FALSE, extensions = 'Buttons',
                     options = list(dom = 'Blfrtip', pageLength = 15, buttons = c('copy', 'csv', 'pdf', 'print')),
-                    caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;', 
+                    caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;',
                                                       'Table: Dataset with the zlog values')) %>%
-        DT:: formatStyle(columns = "Prev.lower zlog", color =  styleEqual(datme[,6], highzlogvalues(c(datme[,6]))),
-                         backgroundColor =  styleEqual(datme[,6], zlogcolor(c(datme[,6])))) %>%
-        DT:: formatStyle(columns = "Prev.upper zlog", color =  styleEqual(datme[,7], highzlogvalues(c(datme[,7]))),
-                         backgroundColor =  styleEqual(datme[,7], zlogcolor(c(datme[,7])))) %>%
-        DT:: formatStyle(columns = "Next.lower zlog", color =  styleEqual(datme[,8], highzlogvalues(c(datme[,8]))),
-                         backgroundColor =  styleEqual(datme[,8], zlogcolor(c(datme[,8])))) %>%
-        DT:: formatStyle(columns = "Next.upper zlog", color =  styleEqual(datme[,9], highzlogvalues(c(datme[,9]))),
-                         backgroundColor =  styleEqual(datme[,9], zlogcolor(c(datme[,9])))) %>%
-        DT:: formatStyle(columns = "Max. abs. zlog", backgroundColor =  
-                           styleEqual(datme[,10], highzlogvalues(c(datme[,10]), threshold = input$maxzlog, background = TRUE))) 
+        DT:: formatStyle(columns = "Max.abs.zlog",color = styleEqual(datme[,9], highzlogvalues(c(datme[,9]))),
+                         backgroundColor =  styleEqual(datme[,9], zlogcolor(c(datme[,9]))))
         }
   })
 
