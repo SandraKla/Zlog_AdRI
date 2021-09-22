@@ -129,11 +129,15 @@ compute.jumps <- function(datse,sort.by.age.groups=T){
       mat[inds[length(inds)],5] <- 0
       
       mat[inds[length(inds)],6] <- max(abs(mat[inds[length(inds)],2:5]))
+      
+      mat[inds[1],2] <- NA
+      mat[inds[1],3] <- NA
+      mat[inds[length(inds)],4] <- NA
+      mat[inds[length(inds)],5] <- NA
     }
   }
   return(data.frame(dats,mat))
 }
-
 
 #' Generates a plot which either shows the reference limits depending on the age or the zlog values computed by the function compute.jumps.
 #'
@@ -180,18 +184,18 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     maxv <- max(datinds$prev.lower2zlog, datinds$prev.upper2zlog, datinds$next.lower2zlog, datinds$next.upper2zlog, na.rm = TRUE)
     
     plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
-         ylim=c(minv,maxv),xlab="Age [days]",ylab="zlog",log=log.scale,cex=cex.pch)
+         ylim=c(minv,maxv),xlab="Age in days",ylab="zlog",log=log.scale,cex=cex.pch)
     if (!is.null(grid.col)){
       grid(col="lightgrey", lwd = 0.5)
     }
     for (i in 1:nrow(datinds)){
       if (i<nrow(datinds)){
-        points(datinds$start.time.d[i]+offset.x,datinds$next.lower2zlog[i],pch= "\u25BA",col=col.lower,cex=cex.pch)
-        points(datinds$start.time.d[i]+offset.x,datinds$next.upper2zlog[i],pch= "\u25BA",col=col.upper,cex=cex.pch)
+        points(datinds$start.time.d[i+1]+offset.x,datinds$next.lower2zlog[i],pch= "\u25C4",col=col.lower,cex=cex.pch)
+        points(datinds$start.time.d[i+1]+offset.x,datinds$next.upper2zlog[i],pch= "\u25C4",col=col.upper,cex=cex.pch)
       }
       if (i>1){
-        points(datinds$start.time.d[i]+offset.x,datinds$prev.lower2zlog[i],pch= "\U25C4",col=col.lower,cex=cex.pch)
-        points(datinds$start.time.d[i]+offset.x,datinds$prev.upper2zlog[i],pch= "\U25C4",col=col.upper,cex=cex.pch)
+        points(datinds$start.time.d[i]+offset.x,datinds$prev.lower2zlog[i],pch= "\U25BA",col=col.lower,cex=cex.pch)
+        points(datinds$start.time.d[i]+offset.x,datinds$prev.upper2zlog[i],pch= "\U25BA",col=col.upper,cex=cex.pch)
       }
     }
     # Plot the green lines between -1.96 and 1.96
@@ -204,12 +208,12 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     maxv <- max(datinds$UpperLimit)
     
     plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
-         ylim=c(minv,maxv),xlab="Age [days]",ylab=paste(param.code,"in", unit.param),log=log.scale,cex=cex.pch)
+         ylim=c(minv,maxv),xlab="Age in days",ylab=paste(param.code,"(", unit.param, ")"),log=log.scale,cex=cex.pch)
     if (!is.null(grid.col)){
       grid(col="lightgrey", lwd = 0.5)
     }
 
-    points(datinds$start.time.d+offset.x,datinds$LowerLimit,pch=24,col=col.lower, bg = col.lower, cex=cex.pch)
+    #points(datinds$start.time.d+offset.x,datinds$LowerLimit,pch=24,col=col.lower, bg = col.lower, cex=cex.pch)
     #points(datinds$start.time.d+offset.x,datinds$LowerLimit,col=col.lower,type="p",lwd=lwd.reflims,cex=cex.pch)
     
     x_lower <- datinds$start.time.d+offset.x
@@ -218,7 +222,7 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     segments(x_lower[-length(x_lower)],y_lower[-length(x_lower)],x_lower[-1],y_lower[-length(x_lower)])
     lowerlimit <- data.frame(x = x_lower, y = y_lower)
     
-    points(datinds$start.time.d+offset.x,datinds$UpperLimit,pch=25,col=col.upper, bg = col.upper, cex=cex.pch)
+    #points(datinds$start.time.d+offset.x,datinds$UpperLimit,pch=25,col=col.upper, bg = col.upper, cex=cex.pch)
     #points(datinds$start.time.d+offset.x,datinds$UpperLimit,col=col.upper,type="s",lwd=lwd.reflims,cex=cex.pch)
   
     x_upper <- datinds$start.time.d+offset.x
@@ -279,9 +283,9 @@ zlogcolor <- function(x, hex = TRUE,
   #   G = round(a[2] + w[2] / ((1 + t[2] * exp(-s[2] * (-x - m[2]))) ^ (1 / t[2])))
   # }
   
-  R[is.na(R)] <- 0
-  B[is.na(B)] <- 0
-  G[is.na(G)] <- 0
+  R[is.na(R)] <- 255
+  B[is.na(B)] <- 255
+  G[is.na(G)] <- 255
   
   ifelse (hex,
           return(rgb(R, G, B, max = 255)),
