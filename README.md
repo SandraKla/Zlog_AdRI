@@ -8,6 +8,7 @@ This Shiny App computes the zlog values of the preceding and the subsequent refe
 <img src="https://render.githubusercontent.com/render/math?math={zlog(x)=(log(x) - \frac{log(UG) %2B log(OG)}{2}}) * \frac{3.92}{log(OG) - log(UG)}" align="center">
 If the zlog value deviates significantly from -1.96 to 1.96, the reference intervals and the age groups should possibly be renewed to obtain age-dependent reference intervals!
 <p>&nbsp</p>
+<img src="docs/table.png" align="center"/>
 <img src="docs/shiny.png" align="center"/>
 
 Guide as PDF: [Workflow.pdf](https://github.com/SandraKla/Zlog_AdRI/raw/master/docs/Workflow.pdf)
