@@ -2,8 +2,6 @@
 
 ---
 
-Guide as PDF: [Workflow.pdf](https://github.com/SandraKla/Zlog_AdRI/raw/master/docs/Workflow.pdf)
-
 ### Load new data 
 
 For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/blob/master/data/CALIPER.csv) as template with the columns:
@@ -17,17 +15,16 @@ For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/bl
 * **LowerLimit**: Start of the reference interval (LL)
 * **UpperLimit**: Start of the reference interval (UL)
 
-The data must be in CSV-format (sep = "," and dec = ".").
-
 ### Settings
 
-<img src="setting.png" align="center" style="width:300px;"/>
+<img style="float: left; width:450px;" src="setting.png"/>
 
-1)	Upload the CSV File with own reference intervals 
+<div style="float: right; width:450px;">
+1)	Upload the CSV File with own reference intervals. 
 
 2)	Replacement values: If the lower reference limit is zero, it will be set to 0.001 and the upper reference limit to 100 or by own given reference limits.
 
-<img src="shiny_replace.png" align="center" style="width:300px;"/>
+<img src="shiny_replace.png" text-align="center" style="width:500px;"/>
 
 3)	Select the sex
 
@@ -35,23 +32,23 @@ The data must be in CSV-format (sep = "," and dec = ".").
 
 5)	Select if the x-axis should be logarithmic
 
-6)	Select the maximum zlog value for quick determination of very high zlog values
+6)	Select the maximum zlog value for quick determination of very high zlog values (Example with the preloaded CALIPER-Dataset)
 
-<img src="shiny_high_zlog.png" align="center" style="width:300px;"/>
+<img src="shiny_high_zlog.png" text-align="center" style="width:365px;"/>
+</div>
+<br>
 
 ### Table with zlog values
 
-The table shows the zlog values. Max. abs. zlog values above 1.96 are in orange/red. The zlog value should be optimally between 1.96 and -1.96.
-
-The table shows following informations:
+The table shows the zlog values. Max. abs. zlog values above 1.96 are in orange/red. The zlog value should be optimally between 1.96 and -1.96.The table shows following information:
 
 <img src="shiny_table.png" align="center"/>
 
-- Prev.lower zlog = zlog value to previous lower limit 
-- Prev.upper zlog = zlog value to previous upper limit
-- Next.lower zlog = zlog value to next lower limit
-- Next.upper zlog = zlog value to next upper limit
-- Max. abs. zlog = Absolute maximum zlog value of this reference interval
+- _Prev.lower zlog_ = zlog value to previous lower limit 
+- _Prev.upper zlog_ = zlog value to previous upper limit
+- _Next.lower zlog_ = zlog value to next lower limit
+- _Next.upper zlog_ = zlog value to next upper limit
+- _Max. abs. zlog_ = Absolute maximum zlog value of this reference interval
 
 
 ### Plot with zlog values 
