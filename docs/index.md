@@ -11,5 +11,3 @@ If the zlog value deviates significantly from -1.96 to 1.96, the reference inter
 <img src="shiny.png" align="center"/>
 
 Link to the publication: *A Tool for Plausibility Checks of Reference Interval Limits*
-
-See also the CRAN-package "zlog": Sebastian Gibb. (2021). ampel-leipzig/zlog: First public CRAN release. (1.0.0). Zenodo. [10.5281/zenodo.4732319](https://doi.org/10.5281/zenodo.4732319)

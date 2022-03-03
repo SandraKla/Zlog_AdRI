@@ -17,7 +17,7 @@ For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/bl
 
 ### Settings
 
-<img style="float: left; width:350px;" src="setting.png"/>
+<img style="float: left; width:450px;" src="setting.png"/>
 
 <div style="float: right; width:350px;">
 1)	Upload the CSV File with own reference intervals. 
