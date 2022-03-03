@@ -17,9 +17,9 @@ For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/bl
 
 ### Settings
 
-<img style="float: left; width:450px;" src="setting.png"/>
+<img style="float: left; width:350px;" src="setting.png"/>
 
-<div style="float: right; width:450px;">
+<div style="float: right; width:350px;">
 1)	Upload the CSV File with own reference intervals. 
 
 2)	Replacement values: If the lower reference limit is zero, it will be set to 0.001 and the upper reference limit to 100 or by own given reference limits.
