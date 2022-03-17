@@ -1,7 +1,6 @@
 ####################################### WELCOME TO THE SHINY APP ##################################
-####################################### from Sandra Klawitter (2020) ##############################
+####################################### from Sandra K. (2022) #####################################
 ###################################################################################################
-
 
 ####################################### Load Script and Example-Dataset ###########################
 
@@ -35,15 +34,17 @@ ui <- fluidPage(
                       ".csv")), hr(),
             
             helpText("Settings for the calculation of the zlog-value:"),
-            checkboxInput("replacement", "Replacement values for reference limits", value = FALSE),
+            checkboxInput("replacement", "Customize replacement values for the RI", value = FALSE),
             conditionalPanel(
               condition = "input.replacement == 1", 
-              numericInput("replace_low", "Replacement value for the lower reference limit:", 
+              numericInput("replace_low", "Replacement value for the LL:", 
                            0.001, min = 0, max = 100)), 
             conditionalPanel(
               condition = "input.replacement == 1", 
-              numericInput("replace_upper", "Replacement value for the upper reference limit:", 
+              numericInput("replace_upper", "Replacement value for the UL:", 
                            100, min = 0.1, max = 1000)), 
+            
+            hr(),
             
             conditionalPanel(
               condition = "input.tabselected == 'Table'", 
@@ -53,15 +54,23 @@ ui <- fluidPage(
               condition = "input.tabselected == 'Plot'", 
               selectInput("sex_plot", "Select the sex:", choices = c("Female (F)"="F", "Male (M)"="M"))),
             
-            hr(),
-        
-            helpText("Settings for the plot:"),
+            conditionalPanel(
+              condition = "input.tabselected == 'Plot'", hr(),
             selectInput("parameter", "Select the lab parameter:", choices = dataset_original$CODE, 
-                        selected = TRUE),
-            checkboxInput("xlog", "Logarithmic scale for the x-axis", value = FALSE), hr(),
+                        selected = TRUE)),
+            conditionalPanel(
+              condition = "input.tabselected == 'Plot'", 
+            checkboxInput("xlog", "Logarithmic scale for the x-axis", value = FALSE)), 
+            
+            hr(),
             
             numericInput("maxzlog", "Maximum absolute zlog value:", 10, min = 0, max = 50),
-            htmlOutput("helptext")
+            htmlOutput("helptext"),
+            
+            hr(),
+            
+            helpText("For further information visit our", a("Website", href="https://sandrakla.github.io/Zlog_AdRI/"),"!")
+                     # br(), "Link to the publication: A Tool for Plausibility Checks of Reference Interval Limits")
         ),
     
       ################################# Main Panel ################################################
@@ -73,12 +82,11 @@ ui <- fluidPage(
 
             p(style = "background-color:#A9A9A9;", 
 
-              "This Shiny App computes the zlog values of the preceding 
-              and the subsequent age group for each lab parameter. 
-              The zlog value should be optimally between -1.96 and 1.96 and values above 
-              -4 or 4 should be checked and minimized by adding an additional age group with new 
-              calculated reference intervals. For further information please visit our", 
-              a("Website", href="https://sandrakla.github.io/Zlog_AdRI/"),"."),
+              "This Shiny App computes the zlog values of the preceding and the subsequent reference 
+              interval (RI) for different analytes for each age group. Many medical RI are 
+              not age-dependent and have large jumps between the individual age groups. 
+              This should be prevented by considering the zlog value. The zlog value should be optimally 
+              between -1.96 and 1.96. The further away the values, the more likely the RI jump is implausible."),
           
             #downloadButton("download_data_example", icon = icon("download"), "Download the example data"),
             DT::dataTableOutput("table")),
@@ -88,12 +96,12 @@ ui <- fluidPage(
             
             p(style = "background-color:#A9A9A9;", 
 
-              "The first plot shows the currently used reference intervals. 
-              The upper reference limit is in red and the lower limit in blue.
-              The second plot shows for the selected lab parameter and each age group the zlog 
-              values of the preceding and the subsequent age group (Legend: 
-              zlog to the preceding age group (Triangle with the point to the right), 
-              zlog to the subsequent age group (Triangle with the point to the left))."),
+              "Original RI (top) and zlog values for the selected lab analytes for each age group (bottom). 
+              The direction of the triangles in the lower figure indicates the zlog values of the preceding (left) and the 
+              following age group (right). 
+              Blue color indicates lower, red the upper reference limits. 
+              The dotted green lines represent the common reference interval of -1.96 to +1.96. 
+              The further the traingles are from these lines, the more likely there is an implausible age jump."),
             
             plotOutput("plot", height = "700px")
         ) 
@@ -290,10 +298,13 @@ server <- function(input, output, session) {
   output$table <- DT::renderDataTable({
     
     datme <- zlog_data()
-    datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, #UNIT = datme$UNIT, 
-                        round_df(datme[,seq(7,length(datme))],3))
+
+    datme <- data.frame(CODE = datme$CODE, SEX = datme$SEX, AGE = 
+                          paste0(datme$AgeFrom, "-", datme$AgeUntil, " (", datme$UNIT, "s)"), 
+                          round_df(datme[,seq(7,length(datme))],3))
+    
     datme$start.time.d <- NULL
-    colnames(datme) <- c("Code", "Sex", "Lower Limit", "Upper Limit", "Prev.lower zlog",
+    colnames(datme) <- c("Code", "Sex", "Age", "Lower Limit", "Upper Limit", "Prev.lower zlog",
                          "Prev.upper zlog", "Next.lower zlog", "Next.upper zlog", "Max.abs.zlog")
 
     options(htmlwidgets.TOJSON_ARGS = list(na = 'string'))
@@ -337,8 +348,8 @@ server <- function(input, output, session) {
                     options = list(dom = 'Blfrtip', pageLength = 15, buttons = c('copy', 'csv', 'pdf', 'print')),
                     caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;',
                                                       'Table: Dataset with the zlog values')) %>%
-        DT:: formatStyle(columns = "Max.abs.zlog", color = styleEqual(datme[,9], highzlogvalues(c(datme[,9]))),
-                         backgroundColor =  styleEqual(datme[,9], zlogcolor(c(datme[,9]))))
+        DT:: formatStyle(columns = "Max.abs.zlog", color = styleEqual(datme[,10], highzlogvalues(c(datme[,10]))),
+                         backgroundColor =  styleEqual(datme[,10], zlogcolor(c(datme[,10]))))
 
     }
     else{
@@ -346,8 +357,8 @@ server <- function(input, output, session) {
                     options = list(dom = 'Blfrtip', pageLength = 15, buttons = c('copy', 'csv', 'pdf', 'print')),
                     caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;',
                                                       'Table: Dataset with the zlog values')) %>%
-        DT:: formatStyle(columns = "Max.abs.zlog",color = styleEqual(datme[,9], highzlogvalues(c(datme[,9]))),
-                         backgroundColor =  styleEqual(datme[,9], zlogcolor(c(datme[,9]))))
+        DT:: formatStyle(columns = "Max.abs.zlog",color = styleEqual(datme[,9], highzlogvalues(c(datme[,10]))),
+                         backgroundColor =  styleEqual(datme[,10], zlogcolor(c(datme[,10]))))
         }
   })
 
