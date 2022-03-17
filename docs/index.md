@@ -9,5 +9,6 @@ This Shiny App computes the zlog values of the preceding and the subsequent refe
 If the zlog value deviates significantly from -1.96 to 1.96, the reference intervals and the age groups should possibly be renewed to obtain age-dependent reference intervals.
 
 <img src="shiny.png" align="center"/>
+<img src="shiny_table.png" align="center"/>
 
 Link to the publication: *A Tool for Plausibility Checks of Reference Interval Limits*
