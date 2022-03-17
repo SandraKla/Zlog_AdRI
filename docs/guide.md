@@ -17,19 +17,17 @@ For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/bl
 
 ### Settings
 
-<img src="setting.png" align="center" style="width:300px;"/>
-
 1)	Upload the CSV File with own reference intervals. 
 
-2)	Replacement values: If the lower reference limit is zero, it will be set to 0.001 and the upper reference limit to 100 or by own given reference limits.
+2)	Customize the replacement values for the RI: If the lower reference limit is zero, it will be set to 0.001 and the upper reference limit to 100 or by own given reference limits.
 
 <img src="shiny_replace.png" text-align="center" style="width:300px;"/>
 
 3)	Select the sex
 
-4)	Select the lab parameter
+4)	In Plot: Select the lab parameter
 
-5)	Select if the x-axis should be logarithmic
+5)	In Plot: Select if the x-axis should be logarithmic
 
 6)	Select the maximum zlog value for quick determination of very high zlog values (Example with the preloaded CALIPER-Dataset)
 
