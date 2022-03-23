@@ -2,10 +2,10 @@
 
 <img src="www/Logo.svg" width="225px" height="150px" align="right"/>
 
-[![](https://img.shields.io/github/license/SandraKla/Zlog_AdRI.svg)]()
-[![](https://img.shields.io/github/last-commit/SandraKla/Zlog_AdRI/master.svg)]()
-[![](https://img.shields.io/github/languages/count/SandraKla/Zlog_AdRI.svg)]()
-[![](https://img.shields.io/github/languages/top/SandraKla/Zlog_AdRI.svg)]()
+![](https://img.shields.io/github/license/SandraKla/Zlog_AdRI.svg)
+![](https://img.shields.io/github/last-commit/SandraKla/Zlog_AdRI/master.svg)
+![](https://img.shields.io/github/languages/count/SandraKla/Zlog_AdRI.svg)
+![](https://img.shields.io/github/languages/top/SandraKla/Zlog_AdRI.svg)
 
 This Shiny App computes the zlog values of the preceding and the subsequent reference interval for different analytes for each age group. Many medical reference intervals are not age-dependent and have large jumps between the individual age groups. This should be prevented by considering the zlog value. The lower reference limits (LL) and upper reference limits (UL) can transform any result x into a zlog value using the following equation: 
 
