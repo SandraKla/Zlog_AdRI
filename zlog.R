@@ -8,7 +8,7 @@
 #' @param L lower reference limit
 #' @param U upper reference limit
 zlog <- function(x,L=0,U=0){
-  if (is.na(x) | L<=0 | U<=0 | U<=L){
+  if (is.na(x) | is.na(L) | is.na(U) | L<=0 | U<=0 | U<=L){
     return(NA)
   }
   
@@ -106,7 +106,9 @@ compute.jumps <- function(datse,sort.by.age.groups=T){
       mat[inds[1],4] <- zlog(dats$LowerLimit[inds[2]],L=dats$LowerLimit[inds[1]],U=dats$UpperLimit[inds[1]])
       mat[inds[1],5] <- zlog(dats$UpperLimit[inds[2]],L=dats$LowerLimit[inds[1]],U=dats$UpperLimit[inds[1]])
       
+      mat[inds[1],2:5][is.na(mat[inds[1],2:5])] <- 0
       mat[inds[1],6] <- max(abs(mat[inds[1],2:5]))
+      mat[inds[1],2:5][mat[inds[1],2:5]==0] <- NA
       
       if (length(inds)>2){
         for (i in 2:(length(inds)-1)){
@@ -117,7 +119,9 @@ compute.jumps <- function(datse,sort.by.age.groups=T){
           mat[inds[i],4] <- zlog(dats$LowerLimit[inds[i+1]],L=dats$LowerLimit[inds[i]],U=dats$UpperLimit[inds[i]])
           mat[inds[i],5] <- zlog(dats$UpperLimit[inds[i+1]],L=dats$LowerLimit[inds[i]],U=dats$UpperLimit[inds[i]])
           
+          mat[inds[i],2:5][is.na(mat[inds[i],2:5])] <- 0
           mat[inds[i],6] <- max(abs(mat[inds[i],2:5]))
+          mat[inds[i],2:5][mat[inds[i],2:5]==0] <- NA
         }
       }
       
@@ -128,7 +132,9 @@ compute.jumps <- function(datse,sort.by.age.groups=T){
       mat[inds[length(inds)],4] <- 0
       mat[inds[length(inds)],5] <- 0
       
+      mat[inds[length(inds)],2:5][is.na(mat[inds[length(inds)],2:5])] <- 0
       mat[inds[length(inds)],6] <- max(abs(mat[inds[length(inds)],2:5]))
+      mat[inds[length(inds)],2:5][mat[inds[length(inds)],2:5]==0] <- NA
       
       mat[inds[1],2] <- NA
       mat[inds[1],3] <- NA
@@ -182,6 +188,13 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
   if (use.zlog){
     minv <- min(datinds$prev.lower2zlog, datinds$prev.upper2zlog, datinds$next.lower2zlog, datinds$next.upper2zlog, na.rm = TRUE)
     maxv <- max(datinds$prev.lower2zlog, datinds$prev.upper2zlog, datinds$next.lower2zlog, datinds$next.upper2zlog, na.rm = TRUE)
+    if(is.na(minv) || is.infinite(minv) || minv == 0){
+      minv <- -2
+    }
+    
+    if(is.na(maxv) || is.infinite(maxv) || maxv == 0){
+      maxv <- 2
+    }
     
     plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
          ylim=c(minv,maxv),xlab="Age in days",ylab="zlog",log=log.scale,cex=cex.pch)
@@ -205,6 +218,9 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     }
   else{
     minv <- min(datinds$LowerLimit)
+    if(is.na(minv)){
+      minv <- 0
+    }
     maxv <- max(datinds$UpperLimit)
     
     plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),

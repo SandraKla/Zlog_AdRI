@@ -31,25 +31,25 @@ ui <- fluidPage(
             fileInput("data_table", "Upload CSV File:", accept = c(
                       "text/csv",
                       "text/comma-separated-values,text/plain",
-                      ".csv")), hr(),
+                      ".csv")), #hr(),
             
-            helpText("Settings for the calculation of the zlog-value:"),
-            checkboxInput("replacement", "Customize replacement values for the RI", value = FALSE),
-            conditionalPanel(
-              condition = "input.replacement == 1", 
-              numericInput("replace_low", "Replacement value for the LL:", 
-                           0.001, min = 0, max = 100)), 
-            conditionalPanel(
-              condition = "input.replacement == 1", 
-              numericInput("replace_upper", "Replacement value for the UL:", 
-                           100, min = 0.1, max = 1000)), 
+            #helpText("Settings for the calculation of the zlog-value:"),
+            #checkboxInput("replacement", "Customize replacement values for the RI", value = FALSE),
+            #conditionalPanel(
+            #  condition = "input.replacement == 1", 
+            #  numericInput("replace_low", "Replacement value for the LL:", 
+            #               0.001, min = 0, max = 100)), 
+            #conditionalPanel(
+            #  condition = "input.replacement == 1", 
+            #  numericInput("replace_upper", "Replacement value for the UL:", 
+            #               100, min = 0.1, max = 1000)), 
             
-            hr(),
+            #hr(),
             
             conditionalPanel(
               condition = "input.tabselected == 'Table'", 
-              selectInput("sex", "Select the sex:", choices = c("All (AL)"="B", "Female (F)"="F", "Male (M)"="M"))),
-            
+              selectInput("sex", "Select the sex:", choices = #c("All (AL)"="B", "Female (F)"="F", "Male (M)"="M"))),
+                            c("Female (F)"="F", "Male (M)"="M"))),
             conditionalPanel(
               condition = "input.tabselected == 'Plot'", 
               selectInput("sex_plot", "Select the sex:", choices = c("Female (F)"="F", "Male (M)"="M"))),
@@ -86,11 +86,11 @@ ui <- fluidPage(
               interval (RI) for different analytes for each age group. Many medical RI are 
               not age-dependent and have large jumps between the individual age groups. 
               This should be prevented by considering the zlog value. The zlog value should be optimally 
-              between -1.96 and 1.96. The further away the values, the more likely the RI jump is implausible."),
+              between -1.96 and 1.96. The further away the values, the more likely the RI jump is implausible."), 
+            htmlOutput("caution"),
           
             #downloadButton("download_data_example", icon = icon("download"), "Download the example data"),
             DT::dataTableOutput("table")),
-            #htmlOutput("caution")),
           
           tabPanel("Plot", icon = icon("calculator"),
             
@@ -117,6 +117,7 @@ server <- function(input, output, session) {
   
   options(shiny.plot.res=128)
   options(shiny.sanitize.errors = TRUE)
+  options(warn = -1)
   
   ##################################### Reactive Expressions ######################################
   
@@ -134,30 +135,40 @@ server <- function(input, output, session) {
   data_caution <- reactive({
   
     dat <- get_data_file()
-    validate(need(ncol(dat) == 8, 
-                  "Check if you have used the correct template!"))
 
-    if(input$replacement == TRUE){
-      
-      minv <- input$replace_low
-      maxv.apc <- input$replace_upper
-      
-      validate(need(minv > 0, ""))
-      validate(need(maxv.apc > 0, ""))
-    } 
-    else{
-      minv <- 0.001
-      maxv.apc <- 100}
-    
     ### Check for upper and lower limit == 0
     indscri <- subset(1:nrow(dat),dat$LowerLimit==0)
-    levscri <- levels(factor(dat$CODE[indscri]))
+    levscriage <- paste0(dat$CODE[indscri], " (", dat$AgeFrom[indscri], "-", dat$AgeUntil[indscri], " ", dat$UNIT[indscri], "s)")
     indscri2 <- subset(1:nrow(dat),dat$UpperLimit==0)
+    levscri2age <- paste0(dat$CODE[indscri2], " (", dat$AgeFrom[indscri2], "-", dat$AgeUntil[indscri2], " ", dat$UNIT[indscri2], "s)")
+    
+    levscri <- levels(factor(dat$CODE[indscri]))
     levscri2 <- levels(factor(dat$CODE[indscri2]))
     
-    text <- HTML(paste("<p>",  "Caution with these lab parameters! The lower limit for these 
-                       lab parameters is zero:", toString(levscri), "
-                       . And the upper reference limit for these lab parameters:", toString(levscri2),"</p>"))
+    if(length(levscri) <= 1){
+        zero_lower <- paste("The Lower Limit (LL) for this lab parameter is zero:", toString(levscriage), ".")
+        if(length(levscri) == 0){
+            zero_lower <- ""
+        }
+    } else{
+        zero_lower <- paste("The Lower Limit (LL) for these lab parameters is zero:", toString(levscriage), ".")
+    }
+    
+    if(length(levscri2) <= 1){
+      zero_upper <- paste("The Upper Limit (UL) for this lab parameter is zero:", toString(levscri2age), ".")
+      if(length(levscri2) == 0){
+        zero_upper <- ""
+      }
+    } else{
+      zero_upper <- paste("The Upper Limit (UL) for these lab parameters is zero:", toString(levscri2age), ".")
+    }
+    
+    text <- HTML(paste("<p>", zero_lower, zero_upper,"</p>"))
+    
+    if(zero_lower == "" && zero_upper == ""){
+      text = "";
+    }
+
     text
   })
   
@@ -170,18 +181,18 @@ server <- function(input, output, session) {
     validate(need(ncol(dat) == 8, 
                   "Check if you have used the correct template!"))
     
-    if(input$replacement == TRUE){
-      
-      # to prevent possible error messages because of the slow typing
-      minv <- input$replace_low
-      maxv.apc <- input$replace_upper
-      
-      validate(need(minv > 0, ""))
-      validate(need(maxv.apc > 0, ""))
-    } 
-    else{
-      minv <- 0.001
-      maxv.apc <- 100}
+    # if(input$replacement == TRUE){
+    #   
+    #   # to prevent possible error messages because of the slow typing
+    #   minv <- input$replace_low
+    #   maxv.apc <- input$replace_upper
+    #   
+    #   validate(need(minv > 0, ""))
+    #   validate(need(maxv.apc > 0, ""))
+    # } 
+    # else{
+    #   minv <- 0.001 
+    #   maxv.apc <- 100}
     
     ### Store the original data set.
     dat.orig <- dat
@@ -190,16 +201,16 @@ server <- function(input, output, session) {
     dat <- dat[!is.na(dat$LowerLimit) | !is.na(dat$UpperLimit),]
     
     ### Remove cases where the upper limit is 0.
-    # dat <- dat[dat$UpperLimit>0,]
-    
+    dat <- dat[dat$UpperLimit>0,]
+
     ### Use only complete cases.
     dat <- dat[complete.cases(dat),]
     
     ### For replacing missing values. (Not needed if only complete cases are used.)
     
     ### Not needed unless the previous line dat <- dat[complete.cases(dat),] is not applied.
-    dat$UpperLimit[is.na(dat$UpperLimit) | dat$UpperLimit==0] <- maxv.apc
-    dat$LowerLimit[is.na(dat$LowerLimit) | dat$LowerLimit==0] <- minv
+    #dat$UpperLimit[is.na(dat$UpperLimit) | dat$UpperLimit==0] <- maxv.apc
+    dat$LowerLimit[is.na(dat$LowerLimit) | dat$LowerLimit==0] <- NA
     
     ### Subset for the men. Note that the reference limits for men and for all are needed.
     datm <- subset(dat,dat$SEX=="M" | dat$SEX=="AL")
@@ -343,23 +354,23 @@ server <- function(input, output, session) {
     #                      backgroundColor =  styleEqual(datme[,9], zlogcolor(c(datme[,9]))))
     #     }
     
-    if(input$replacement == TRUE){
-      DT::datatable(datme, rownames= FALSE, extensions = 'Buttons',
-                    options = list(dom = 'Blfrtip', pageLength = 15, buttons = c('copy', 'csv', 'pdf', 'print')),
-                    caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;',
-                                                      'Table: Dataset with the zlog values')) %>%
-        DT:: formatStyle(columns = "Max.abs.zlog", color = styleEqual(datme[,10], highzlogvalues(c(datme[,10]))),
-                         backgroundColor =  styleEqual(datme[,10], zlogcolor(c(datme[,10]))))
+    # if(input$replacement == TRUE){
+    #   DT::datatable(datme, rownames= FALSE, extensions = 'Buttons',
+    #                 options = list(dom = 'Blfrtip', pageLength = 15, buttons = c('copy', 'csv', 'pdf', 'print')),
+    #                 caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;',
+    #                                                   'Table: Dataset with the zlog values')) %>%
+    #     DT:: formatStyle(columns = "Max.abs.zlog", color = styleEqual(datme[,10], highzlogvalues(c(datme[,10]))),
+    #                      backgroundColor =  styleEqual(datme[,10], zlogcolor(c(datme[,10]))))
 
-    }
-    else{
+    #}
+    #else{
       DT::datatable(datme, rownames= FALSE, extensions = 'Buttons',
                     options = list(dom = 'Blfrtip', pageLength = 15, buttons = c('copy', 'csv', 'pdf', 'print')),
                     caption = htmltools::tags$caption(style = 'caption-side: bottom; text-align: center;',
                                                       'Table: Dataset with the zlog values')) %>%
         DT:: formatStyle(columns = "Max.abs.zlog",color = styleEqual(datme[,9], highzlogvalues(c(datme[,10]))),
                          backgroundColor =  styleEqual(datme[,10], zlogcolor(c(datme[,10]))))
-        }
+        #}
   })
 
   # output$download_data <- downloadHandler(
