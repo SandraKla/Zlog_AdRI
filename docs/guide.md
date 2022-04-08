@@ -17,7 +17,7 @@ For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/bl
 
 If information about the lower or upper limit is missing, the info is displayed and the values can be added to the dataset (if available) and reloaded into this Shiny App. The lower limit is set to NA if it is zero. When the upper value is missing, the datapoints is then not considered in the calculation.
 
-<img src="shiny_caution.png" text-align="center" style="width:300px;"/>
+<img src="shiny_caution.png" text-align="center"/>
 
 ### Settings
 
