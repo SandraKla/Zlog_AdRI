@@ -233,16 +233,20 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     #points(datinds$start.time.d+offset.x,datinds$LowerLimit,col=col.lower,type="p",lwd=lwd.reflims,cex=cex.pch)
     
     x_lower <- datinds$start.time.d+offset.x
+    x_lower <- c(x_lower,x_lower[length(x_lower)] + x_lower[length(x_lower)]/50)
     y_lower <- datinds$LowerLimit
+    y_lower <- c(y_lower,y_lower[length(y_lower)])
     
     segments(x_lower[-length(x_lower)],y_lower[-length(x_lower)],x_lower[-1],y_lower[-length(x_lower)])
     lowerlimit <- data.frame(x = x_lower, y = y_lower)
     
     #points(datinds$start.time.d+offset.x,datinds$UpperLimit,pch=25,col=col.upper, bg = col.upper, cex=cex.pch)
     #points(datinds$start.time.d+offset.x,datinds$UpperLimit,col=col.upper,type="s",lwd=lwd.reflims,cex=cex.pch)
-  
+    
     x_upper <- datinds$start.time.d+offset.x
+    x_upper <- c(x_upper,x_upper[length(x_upper)] + x_upper[length(x_upper)]/50)
     y_upper <- datinds$UpperLimit
+    y_upper  <- c(y_upper,y_upper[length(y_upper)])
 
     segments(x_upper[-length(x_upper)],y_upper[-length(x_upper)],x_upper[-1],y_upper[-length(x_upper)])
     upperlimit <- data.frame(x = x_upper, y = y_upper)
