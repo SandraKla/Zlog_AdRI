@@ -167,19 +167,22 @@ compute.jumps <- function(datse,sort.by.age.groups=T){
 #' before taking the logarithm to avoid log(0) for the youngest age group.
 #' @param ylog If set to true, the y-axis will be shown in log-scale. (Only applicable for use.log=F.)
 #' @param cex.pch The size from the zlog values
+#' @param xaxis_scale The scale of the x-axis ("days", "years", "days_years")
 draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
                                      pch.prev=15, pch.next=16, col.lower="cornflowerblue", col.upper="indianred", grid.col = T,
-                                     lty.reflims=2, col.reflims="seagreen", lwd.reflims=1, xlog=F, ylog=F, cex.pch = 2){
+                                     lty.reflims=2, col.reflims="seagreen", lwd.reflims=1, xlog=F, ylog=F, cex.pch = 2,xaxis_scale = "days"){
   
   inds <- subset(1:nrow(dats),dats$CODE==param.code)
   datinds <- dats[inds,]
   unit.param <- datinds$LABUNIT[1]
   offset.x <- 0
   log.scale <- ""
+  abline.years <- c(0:100*365)
   
   if (xlog){
     log.scale <- paste0(log.scale,"x")
     offset.x <- 1
+    abline.years <- c(1,1:100*365)
   }
   if (ylog){
     log.scale <- paste0(log.scale,"y")
@@ -196,11 +199,37 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
       maxv <- 2
     }
     
-    plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
+    if(xaxis_scale == "days"){
+      plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
          ylim=c(minv,maxv),xlab="Age in days",ylab="zlog",log=log.scale,cex=cex.pch)
-    if (!is.null(grid.col)){
-      grid(col="lightgrey", lwd = 0.5)
+      
+      if (!is.null(grid.col)){
+        grid(col="lightgrey", lwd = 0.5)
+      }
     }
+    
+    if(xaxis_scale == "days_years"){
+      plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
+           ylim=c(minv,maxv),xlab="",ylab="zlog",log=log.scale,cex=cex.pch)
+      axis(1, labels = 0:100, at = abline.years, line = 2.5)
+      mtext("Age in days/years", side = 1, line = 5)
+      
+      if (!is.null(grid.col)){
+        grid(col="lightgrey", lwd = 0.5)
+      }
+    }
+    
+    if(xaxis_scale == "years"){
+      plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),xaxt='n',
+           ylim=c(minv,maxv),xlab="Age in years",ylab="zlog",log=log.scale,cex=cex.pch)
+      axis(1, labels = 0:100, at = abline.years)
+      abline(v =abline.years, col="lightgrey", lwd = 0.5, lty = "dotted")
+      
+      if (!is.null(grid.col)){
+        grid(nx = NA, col="lightgrey", lwd = 0.5)
+      }
+    }
+    
     for (i in 1:nrow(datinds)){
       if (i<nrow(datinds)){
         points(datinds$start.time.d[i+1]+offset.x,datinds$next.lower2zlog[i],pch= "\u25C4",col=col.lower,cex=cex.pch)
@@ -214,7 +243,6 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     # Plot the green lines between -1.96 and 1.96
     abline(qnorm(0.025),b=0,col=col.reflims,lwd=lwd.reflims,lty=lty.reflims)
     abline(qnorm(0.975),b=0,col=col.reflims,lwd=lwd.reflims,lty=lty.reflims)
-  
     }
   else{
     minv <- min(datinds$LowerLimit)
@@ -223,17 +251,42 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     }
     maxv <- max(datinds$UpperLimit)
     
-    plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
+    if(xaxis_scale == "days"){
+      plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
          ylim=c(minv,maxv),xlab="Age in days",ylab=paste(param.code,"(", unit.param, ")"),log=log.scale,cex=cex.pch)
-    if (!is.null(grid.col)){
-      grid(col="lightgrey", lwd = 0.5)
+      
+      if (!is.null(grid.col)){
+        grid(col="lightgrey", lwd = 0.5)
+      }
     }
-
+    
+    if(xaxis_scale == "days_years"){
+      plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x),
+           ylim=c(minv,maxv),xlab="",ylab=paste(param.code,"(", unit.param, ")"),log=log.scale,cex=cex.pch)
+      axis(1, labels = 0:100, at = abline.years, line = 2.5)
+      mtext("Age in days/years", side = 1, line = 5)
+      
+      if (!is.null(grid.col)){
+        grid(col="lightgrey", lwd = 0.5)
+      }
+    }
+    
+    if(xaxis_scale == "years"){
+      plot(NULL,xlim=c(min(datinds$start.time.d)+offset.x,max(datinds$start.time.d)+offset.x), xaxt='n',
+           ylim=c(minv,maxv),xlab="Age in years",ylab=paste(param.code,"(", unit.param, ")"),log=log.scale,cex=cex.pch)
+      axis(1, labels = 0:100, at = abline.years)
+      abline(v =abline.years, col="lightgrey", lwd = 0.5, lty = "dotted")
+      
+      if (!is.null(grid.col)){
+        grid(nx = NA, col="lightgrey", lwd = 0.5)
+      }
+    }
+    
     #points(datinds$start.time.d+offset.x,datinds$LowerLimit,pch=24,col=col.lower, bg = col.lower, cex=cex.pch)
     #points(datinds$start.time.d+offset.x,datinds$LowerLimit,col=col.lower,type="p",lwd=lwd.reflims,cex=cex.pch)
     
     x_lower <- datinds$start.time.d+offset.x
-    x_lower <- c(x_lower,x_lower[length(x_lower)] + x_lower[length(x_lower)]/50)
+    x_lower <- c(x_lower,x_lower[length(x_lower)] + x_lower[length(x_lower)]/25)
     y_lower <- datinds$LowerLimit
     y_lower <- c(y_lower,y_lower[length(y_lower)])
     
@@ -244,7 +297,7 @@ draw.time.dependent.lims <- function(dats, param.code, use.zlog=T,
     #points(datinds$start.time.d+offset.x,datinds$UpperLimit,col=col.upper,type="s",lwd=lwd.reflims,cex=cex.pch)
     
     x_upper <- datinds$start.time.d+offset.x
-    x_upper <- c(x_upper,x_upper[length(x_upper)] + x_upper[length(x_upper)]/50)
+    x_upper <- c(x_upper,x_upper[length(x_upper)] + x_lower[length(x_lower)]/25) 
     y_upper <- datinds$UpperLimit
     y_upper  <- c(y_upper,y_upper[length(y_upper)])
 

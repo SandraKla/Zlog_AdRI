@@ -59,6 +59,13 @@ ui <- fluidPage(
             selectInput("parameter", "Select the lab parameter:", choices = dataset_original$CODE, 
                         selected = TRUE)),
             conditionalPanel(
+              condition = "input.tabselected == 'Plot'",
+              selectInput("xaxis_scale", "Select the x-axis scaling:", 
+                          choices = c("Days"="days", 
+                                      "Years"="years",
+                                      "Days/Years"="days_years"),
+                          selected = TRUE)),
+            conditionalPanel(
               condition = "input.tabselected == 'Plot'", 
             checkboxInput("xlog", "Logarithmic scale for the x-axis", value = FALSE)), 
             
@@ -299,10 +306,15 @@ server <- function(input, output, session) {
     
     # check for log for the xaxis
     xlog_ <- input$xlog
+    xaxis_scale_ <- input$xaxis_scale
+    
+    if(xaxis_scale_ == "days_years"){
+      par(mfrow=c(2,1), mai=c(1.5,0.95,0.15,0.15))
+    }
     
     # Draw the plots
-    draw.time.dependent.lims(datme,lab.param, use.zlog=F,lwd.reflims=2,xlog=xlog_)
-    draw.time.dependent.lims(datme,lab.param, lwd.reflims=2,xlog=xlog_)
+    draw.time.dependent.lims(datme,lab.param, use.zlog=F,lwd.reflims=2,xlog=xlog_, xaxis_scale = xaxis_scale_)
+    draw.time.dependent.lims(datme,lab.param, lwd.reflims=2,xlog=xlog_, xaxis_scale = xaxis_scale_)
     #dev.off()
   })
 

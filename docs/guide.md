@@ -27,7 +27,7 @@ If information about the lower or upper limit is missing, the info is displayed 
 
 3)	In Plot: Select the lab parameter
 
-4)	In Plot: Select if the x-axis should be logarithmic
+4)	In Plot: Select which x-axis scaling should be displayed and if this should be logarithmic
 
 5)	Select the maximum zlog value for quick determination of very high zlog values (Example with the preloaded CALIPER-Dataset)
 
