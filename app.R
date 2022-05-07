@@ -5,7 +5,7 @@
 ####################################### Load Script and Example-Dataset ###########################
 
 source("zlog.R")
-dataset_original <- read.csv("data/CALIPER.csv",na.strings="")
+dataset_original <- read.csv("data/CALIPER.csv",na.strings="", fileEncoding="latin1")
 
 ####################################### Libraries #################################################
 
@@ -132,9 +132,9 @@ server <- function(input, output, session) {
 
     saving <- 
       if(!is.null(input$data_table)){
-        dataset_original <- read.csv(input$data_table[["datapath"]],na.strings="")
+        dataset_original <- read.csv(input$data_table[["datapath"]],na.strings="", fileEncoding="latin1")
       }else{
-        dataset_original <- read.csv("data/CALIPER.csv",na.strings="")
+        dataset_original <- read.csv("data/CALIPER.csv",na.strings="", fileEncoding="latin1")
       }
     return(dataset_original)
   })
