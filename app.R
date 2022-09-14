@@ -220,9 +220,9 @@ server <- function(input, output, session) {
     dat$LowerLimit[is.na(dat$LowerLimit) | dat$LowerLimit==0] <- NA
     
     ### Subset for the men. Note that the reference limits for men and for all are needed.
-    datm <- subset(dat,dat$SEX=="M" | dat$SEX=="AL")
+    datm <- subset(dat,dat$SEX=="M" | dat$SEX=="MF")
     ### Subset for the women. Note that the reference limits for men and for all are needed.
-    datf <- subset(dat,dat$SEX=="F" | dat$SEX=="AL")
+    datf <- subset(dat,dat$SEX=="F" | dat$SEX=="MF")
     ### Subset for the men and women. Note that the reference limits for men and for all are needed.
     datb <- dat
     
@@ -238,7 +238,7 @@ server <- function(input, output, session) {
     if(input$tabselected == "Table"){
       if(input$sex == "M"){datse <- datme}
       if(input$sex == "F"){datse <- datfe}
-      if(input$sex == "B"){datse <- datbe}
+      if(input$sex == "MF"){datse <- datbe}
     }
     if(input$tabselected == "Plot"){
       if(input$sex_plot == "M"){datse <- datme}
@@ -263,13 +263,13 @@ server <- function(input, output, session) {
     ### Check how many and where the absolute zlog value exceeds the given threshold.
     abslim <- input$maxzlog
     
-    ### Indices of occurences of large zlog values.
+    ### Indices of occurrences of large zlog values.
     indscri <- subset(1:nrow(datse),datse$max.abs.zlog>abslim)
     
     ### Names of the lab parameters where large zlog values occur.
     levscri <- levels(factor(datse$CODE[indscri]))
     
-    ### No. of occurences of large zlog values.
+    ### No. of occurrences of large zlog values.
     if(length(levscri) == 1){
       text <- HTML(paste("<p>", sum(datse$max.abs.zlog>abslim, na.rm = TRUE), "zlog values above", abslim,
                   "from this lab parameter:", toString(levscri), "</p>"))}

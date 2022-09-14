@@ -8,7 +8,7 @@ For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/bl
 
 * **CODE**: Name of the analyte ("Calcium") 
 * **LABUNIT**: Unit of the analyte ("mmol/L")
-* **SEX**: "M" for male, "F" for female and "AL" for both
+* **SEX**: "M" for male, "F" for female and "MF" for both
 * **UNIT**: Unit of the age range in "year", "month", "week" or "day"
 * **AgeFrom**: Start of the age range 
 * **AgeUntil**: End of the age range 
