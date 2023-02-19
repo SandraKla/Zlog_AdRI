@@ -11,7 +11,8 @@ dataset_original <- read.csv("data/CALIPER.csv",na.strings="", fileEncoding="lat
 
 if("DT" %in% rownames(installed.packages())){
   library(DT)} else{
-    install.packages("DT")}
+    install.packages("DT")
+    library(DT)}
 
 ####################################### User Interface ############################################
 
