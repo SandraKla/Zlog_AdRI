@@ -11,4 +11,4 @@ If the zlog value deviates significantly from -1.96 to 1.96, the reference inter
 <img src="shiny.png" align="center"/>
 <img src="shiny_table.png" align="center"/>
 
-Link to the publication: *A zlog-based algorithm and tool for plausibility checks of reference intervals*
+Link to the publication: [A zlog-based algorithm and tool for plausibility checks of reference intervals](https://www.degruyter.com/document/doi/10.1515/cclm-2022-0688/html)

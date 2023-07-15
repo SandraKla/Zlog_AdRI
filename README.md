@@ -4,8 +4,6 @@
 
 ![](https://img.shields.io/github/license/SandraKla/Zlog_AdRI.svg)
 ![](https://img.shields.io/github/last-commit/SandraKla/Zlog_AdRI/master.svg)
-![](https://img.shields.io/github/languages/count/SandraKla/Zlog_AdRI.svg)
-![](https://img.shields.io/github/languages/top/SandraKla/Zlog_AdRI.svg)
 
 This Shiny App computes the zlog values of the preceding and the subsequent reference interval for different analytes for each age group. Many medical reference intervals are not age-dependent and have large jumps between the individual age groups. This should be prevented by considering the zlog value. The lower reference limits (LL) and upper reference limits (UL) can transform any result x into a zlog value using the following equation: 
 
@@ -43,7 +41,7 @@ And then start the app with the following code:
 runApp("app.R")
 ```
 
-The package [DT](https://cran.r-project.org/web/packages/DT/index.html) (≥ 0.21) is downloaded or imported when starting this app. The used [R](https://www.r-project.org)-Version must be ≥ 4.1.2 (2021-11-01) -- "Bird Hippie".
+The package [DT](https://cran.r-project.org/web/packages/DT/index.html) (≥ 0.21) and [shinydashboard](https://cran.r-project.org/web/packages/shinydashboard/index.html) (≥ 0.7.2) is downloaded or imported when starting this app. The used [R](https://www.r-project.org)-Version must be ≥ 4.1.2 (2021-11-01).
 
 ## Usage
 
@@ -72,5 +70,3 @@ You are welcome to:
 For more information use the [Homepage](https://sandrakla.github.io/Zlog_AdRI/)! 
 
 Link to the publication: [A zlog-based algorithm and tool for plausibility checks of reference intervals](https://www.degruyter.com/document/doi/10.1515/cclm-2022-0688/html)
-
-See also the CRAN-package "zlog": Sebastian Gibb. (2021). ampel-leipzig/zlog: First public CRAN release. (1.0.0). Zenodo. [10.5281/zenodo.4732319](https://doi.org/10.5281/zenodo.4732319)

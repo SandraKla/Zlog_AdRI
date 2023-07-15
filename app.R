@@ -1,5 +1,5 @@
 ####################################### WELCOME TO THE SHINY APP ##################################
-####################################### from Sandra K. (2022) #####################################
+####################################### from Sandra K. (2023) #####################################
 ###################################################################################################
 
 ####################################### Load Script and Example-Dataset ###########################
@@ -14,110 +14,153 @@ if("DT" %in% rownames(installed.packages())){
     install.packages("DT")
     library(DT)}
 
+if("shinydashboard" %in% rownames(installed.packages())){
+  library(shinydashboard)} else{
+    install.packages("shinydashboard")
+    library(shinydashboard)}
+
 ####################################### User Interface ############################################
 
-ui <- fluidPage(
-  
-  theme = "style.css",
-
-    titlePanel("", windowTitle = "zlog"),
-    
-      sidebarLayout(
+ui <- dashboardPage(
+  dashboardHeader(title = "Zlog_AdRI", titleWidth = 350),
+  dashboardSidebar(
+    width = 350,
+    sidebarMenu(
+      id = "sidebarid",
       
-          ############################# Sidebar ###################################################
-          sidebarPanel(width = 3,
-            
-            h3("Tool for Plausibility Checks of Reference Interval Limits"), br(),          
-                       
-            fileInput("data_table", "Upload CSV File:", accept = c(
-                      "text/csv",
-                      "text/comma-separated-values,text/plain",
-                      ".csv")), #hr(),
-            
-            #helpText("Settings for the calculation of the zlog-value:"),
-            #checkboxInput("replacement", "Customize replacement values for the RI", value = FALSE),
-            #conditionalPanel(
-            #  condition = "input.replacement == 1", 
-            #  numericInput("replace_low", "Replacement value for the LL:", 
-            #               0.001, min = 0, max = 100)), 
-            #conditionalPanel(
-            #  condition = "input.replacement == 1", 
-            #  numericInput("replace_upper", "Replacement value for the UL:", 
-            #               100, min = 0.1, max = 1000)), 
-            
-            #hr(),
-            
-            conditionalPanel(
-              condition = "input.tabselected == 'Table'", 
-              selectInput("sex", "Select the sex:", choices = #c("All (AL)"="B", "Female (F)"="F", "Male (M)"="M"))),
-                            c("Female (F)"="F", "Male (M)"="M"))),
-            conditionalPanel(
-              condition = "input.tabselected == 'Plot'", 
-              selectInput("sex_plot", "Select the sex:", choices = c("Female (F)"="F", "Male (M)"="M"))),
-            
-            conditionalPanel(
-              condition = "input.tabselected == 'Plot'", hr(),
-            selectInput("parameter", "Select the lab parameter:", choices = dataset_original$CODE, 
-                        selected = TRUE)),
-            conditionalPanel(
-              condition = "input.tabselected == 'Plot'",
-              selectInput("xaxis_scale", "Select the x-axis scaling:", 
-                          choices = c("Days"="days", 
-                                      "Years"="years",
-                                      "Days/Years"="days_years"),
-                          selected = TRUE)),
-            conditionalPanel(
-              condition = "input.tabselected == 'Plot'", 
-            checkboxInput("xlog", "Logarithmic scale for the x-axis", value = FALSE)), 
-            
-            hr(),
-            
-            numericInput("maxzlog", "Maximum absolute zlog value:", 10, min = 0, max = 50),
-            htmlOutput("helptext"),
-            
-            hr(),
-            
-            helpText("For further information visit our", a("Website", href="https://sandrakla.github.io/Zlog_AdRI/"),"!")
-                     # br(), "Link to the publication: A Tool for Plausibility Checks of Reference Interval Limits")
-        ),
-    
-      ################################# Main Panel ################################################
-      mainPanel(width = 9,
-
-        tabsetPanel(type = "pills", id = "tabselected", 
-          
-          tabPanel("Table", icon = icon("table"),        
-
-            p(style = "background-color:#A9A9A9;", 
-
-              "This Shiny App computes the zlog values of the preceding and the subsequent reference 
-              interval (RI) for different analytes for each age group. Many medical RI are 
-              not age-dependent and have large jumps between the individual age groups. 
-              This should be prevented by considering the zlog value. The zlog value should be optimally 
-              between -1.96 and 1.96. The further away the values, the more likely the RI jump is implausible."), 
-            htmlOutput("caution"),
-          
-            #downloadButton("download_data_example", icon = icon("download"), "Download the example data"),
-            DT::dataTableOutput("table")),
-          
-          tabPanel("Plot", icon = icon("calculator"),
-            
-            p(style = "background-color:#A9A9A9;", 
-
-              "Original RI (top) and zlog values for the selected lab analytes for each age group (bottom). 
-              The direction of the triangles in the lower figure indicates the zlog values of the preceding (left) and the 
-              following age group (right). 
-              Blue color indicates lower, red the upper reference limits. 
-              The dotted green lines represent the common reference interval of -1.96 to +1.96. 
-              The further the traingles are from these lines, the more likely there is an implausible age jump."),
-            
-            plotOutput("plot", height = "700px")
-        ) 
+      div(
+        style = "text-align:center",
+        br(),
+        "Tool for Plausibility Checks of Reference Interval Limits"
+      ),
+      
+      fileInput(
+        "data_table",
+        "Upload CSV File:",
+        accept = c("text/csv",
+                   "text/comma-separated-values,text/plain",
+                   ".csv")
+      ),
+      conditionalPanel(condition = "input.tabselected == 'Table'",
+                       selectInput(
+                         "sex",
+                         "Select the sex:",
+                         choices = c("Female (F)" = "F", "Male (M)" = "M")
+                       )),
+      conditionalPanel(
+        condition = "input.tabselected == 'Plot'",
+        selectInput(
+          "sex_plot",
+          "Select the sex:",
+          choices = c("Female (F)" = "F", "Male (M)" = "M")
+        )
+      ),
+      conditionalPanel(
+        condition = "input.tabselected == 'Plot'",
+        hr(),
+        selectInput(
+          "parameter",
+          "Select the lab parameter:",
+          choices = dataset_original$CODE,
+          selected = TRUE
+        )
+      ),
+      conditionalPanel(
+        condition = "input.tabselected == 'Plot'",
+        selectInput(
+          "xaxis_scale",
+          "Select the x-axis scaling:",
+          choices = c(
+            "Days" = "days",
+            "Years" = "years",
+            "Days/Years" = "days_years"
+          ),
+          selected = TRUE
+        )
+      ),
+      conditionalPanel(
+        condition = "input.tabselected == 'Plot'",
+        checkboxInput("xlog", "Logarithmic scale for the x-axis", value = FALSE)
+      ),
+      
+      hr(),
+      
+      div(
+        style = "text-align:center",
+        "For further information visit our",
+        a("Website", href = "https://sandrakla.github.io/Zlog_AdRI/"),
+        "or",
+        br(),
+        "read the publication",
+        a("doi: 10.1515/cclm-2022-0688", href = "https://doi.org/10.1515/cclm-2022-0688"),
+        "!"
       )
     )
-  )
-)
+  ),
   
+  dashboardBody(fluidRow(
+    tabBox(
+      title = "Zlog_AdRI",
+      id = "tabselected",
+      width = 9,
+      tabPanel(
+        "Table",
+        icon = icon("table"),
+        
+        p(
+          "This Shiny App computes the zlog values of the preceding and the subsequent reference
+              interval (RI) for different lab parameters for each age group. Many medical RI are
+              not age-dependent and have large jumps between the individual age groups.
+              This should be prevented by considering the zlog value. The zlog value should be optimally
+              between -1.96 and 1.96. The further away the values, the more likely the RI jump is implausible."
+        ),
+        
+        DT::dataTableOutput("table")
+      ),
+      
+      tabPanel(
+        "Plot",
+        icon = icon("calculator"),
+        
+        p(
+          "Original RI (top) and zlog values for the selected lab parameter for each age group (bottom).
+              The direction of the triangles in the lower figure indicates the zlog values of the preceding (left) and the
+              following age group (right).
+              Blue color indicates lower, red the upper reference limits.
+              The dotted green lines represent the common reference interval of -1.96 to +1.96.
+              The further the traingles are from these lines, the more likely there is an implausible age jump."
+        ),
+        
+        plotOutput("plot", height = "700px")
+      )
+    ),
+    
+    box(
+      title = tagList(shiny::icon("info"), "Lab parameters with a value of 0:"),
+      status = "info",
+      width = 3,
+      solidHeader = TRUE,
+      
+      htmlOutput("caution")
+    ),
+    
+    box(
+      title = tagList(shiny::icon("warning"), "High zlog values:"),
+      status = "danger",
+      width = 3,
+      solidHeader = TRUE,
+      
+      numericInput(
+        "maxzlog",
+        "Maximum absolute zlog value:",
+        10,
+        min = 0,
+        max = 50
+      ),
+      htmlOutput("helptext")
+    )
+  ))
+)
 
 ####################################### Server ####################################################
 

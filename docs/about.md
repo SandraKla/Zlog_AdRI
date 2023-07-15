@@ -11,9 +11,7 @@ You are welcome to:
 
 For more information use the [Homepage](https://sandrakla.github.io/Zlog_AdRI/)! 
 
-Link to the publication: *A zlog-based algorithm and tool for plausibility checks of reference intervals*
-
-See also the CRAN-package "zlog": Sebastian Gibb. (2021). ampel-leipzig/zlog: First public CRAN release. (1.0.0). Zenodo. [10.5281/zenodo.4732319](https://doi.org/10.5281/zenodo.4732319)
+Link to the publication: [A zlog-based algorithm and tool for plausibility checks of reference intervals](https://www.degruyter.com/document/doi/10.1515/cclm-2022-0688/html)
 
 ## References
 
@@ -26,5 +24,6 @@ Hoffmann G, Klawonn F, Lichtinghagen R & Orth M. The zlog value as a basis for t
 * [R](https://www.r-project.org) ≥ 4.1.2
 * [DT](https://cran.r-project.org/web/packages/DT/index.html) ≥ 0.21
 * [shiny](https://cran.r-project.org/web/packages/shiny/index.html) ≥ 1.7.1
+* [shinydashboard](https://cran.r-project.org/web/packages/shinydashboard/index.html) ≥ 0.7.2
 
 Older versions may also work, but full functionality is not guaranteed.
