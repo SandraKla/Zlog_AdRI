@@ -46,6 +46,7 @@ The table shows the zlog values. Max. abs. zlog values above 1.96 are in orange/
 - _Next.upper zlog_ = zlog value to next upper limit
 - _Max. abs. zlog_ = Absolute maximum zlog value of this reference interval
 
+<img src="table.png" align="center"/>
 
 ### Plot with zlog values 
 
