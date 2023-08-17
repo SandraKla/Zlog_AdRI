@@ -9,8 +9,6 @@ You are welcome to:
 - Make a pull request on: https://github.com/SandraKla/Zlog_AdRI/pulls
 - Write an Email with any questions and problems to: s.klawitter@ostfalia.de
 
-For more information use the [Homepage](https://sandrakla.github.io/Zlog_AdRI/)! 
-
 Link to the publication: [A zlog-based algorithm and tool for plausibility checks of reference intervals](https://www.degruyter.com/document/doi/10.1515/cclm-2022-0688/html)
 
 ## References
