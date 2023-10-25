@@ -158,6 +158,21 @@ ui <- dashboardPage(
         max = 50
       ),
       htmlOutput("helptext")
+    ),
+    
+    box(
+      title = tagList(shiny::icon("info"), "zlog Calculator"),
+      status = "primary",
+      width = 3,
+      solidHeader = TRUE,
+      
+      p("Individual zlog values can be calculated here:"),
+      
+      numericInput("calculator_target_low", "Lower value:", value = NULL),
+      numericInput("calculator_target_upper", "Upper value:", value = NULL),
+      numericInput("calculator_x", "Value:", value = NULL),
+      
+      DT::dataTableOutput("calculator_table")
     )
   ))
 )
@@ -429,6 +444,23 @@ server <- function(input, output, session) {
         #}
   })
 
+  output$calculator_table <- DT::renderDataTable({
+
+    zlog_value <- zlog(as.numeric(input$calculator_x), 
+                        as.numeric(input$calculator_target_low), 
+                        as.numeric(input$calculator_target_upper))
+    
+    datme <- data.frame("Lower value" = input$calculator_target_low, 
+                        "Upper value" = input$calculator_target_upper, Value = input$calculator_x, 
+                        "zlog" = round_df(zlog_value, 3), check.names = FALSE)
+    
+    options(htmlwidgets.TOJSON_ARGS = list(na = 'string'))
+  
+    DT::datatable(datme, rownames= FALSE, options = list(dom = 't')) %>%
+      DT:: formatStyle(columns = "zlog",color = styleEqual(datme[,4], highzlogvalues(c(datme[,4]))),
+                       backgroundColor =  styleEqual(datme[,4], zlogcolor(c(datme[,4]))))
+  })
+  
   # output$download_data <- downloadHandler(
   #   filename = function(){
   #     paste0("Table_Zlog.csv")

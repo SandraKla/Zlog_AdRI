@@ -21,7 +21,7 @@ If information about the lower or upper limit is missing, the info is displayed 
 
 ### Settings
 
-1)	Upload the CSV File with own reference intervals. 
+1)	Upload the CSV File with own reference intervals 
 
 2)	Select the sex
 
@@ -32,6 +32,10 @@ If information about the lower or upper limit is missing, the info is displayed 
 5)	Select the maximum zlog value for quick determination of very high zlog values (Example with the preloaded CALIPER-Dataset)
 
 <img src="shiny_high_zlog.png" text-align="center" style="width:300px;"/>
+
+6) Or calculate own zlog values
+
+<img src="shiny_calculator_zlog.png" text-align="center" style="width:300px;"/>
 <br>
 
 ### Table with zlog values
