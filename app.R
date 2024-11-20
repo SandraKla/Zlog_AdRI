@@ -34,13 +34,9 @@ ui <- dashboardPage(
         "Tool for Plausibility Checks of Reference Interval Limits"
       ),
       
-      fileInput(
-        "data_table",
-        "Upload CSV File:",
-        accept = c("text/csv",
-                   "text/comma-separated-values,text/plain",
-                   ".csv")
-      ),
+      uiOutput("dataset_file"),
+      actionButton('reset', 'Reset Input', icon = icon("trash")),
+      
       conditionalPanel(condition = "input.tabselected == 'Table'",
                        selectInput(
                          "sex",
@@ -187,11 +183,38 @@ server <- function(input, output, session) {
   
   ##################################### Reactive Expressions ######################################
   
+  values <- reactiveValues(upload_state = NULL)
+  
+  observeEvent(input$dataset_file, {
+    values$upload_state <- 'uploaded'
+  })
+  
+  observeEvent(input$reset, {
+    values$upload_state <- 'reset'
+  })
+  
+  dataset_input <- reactive({
+    if (is.null(values$upload_state)) {
+      return(NULL)
+    } else if (values$upload_state == 'uploaded') {
+      return(input$dataset_file)
+    } else if (values$upload_state == 'reset') {
+      return(NULL)
+    }
+  })
+  
+  output$dataset_file <- renderUI({
+    input$reset ## Create a dependency with the reset button
+    fileInput("dataset_file","Upload CSV File:", accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv"), multiple = FALSE)
+  })
+  
   get_data_file <- reactive({
 
+    input$dataset_file
+    
     saving <- 
-      if(!is.null(input$data_table)){
-        dataset_original <- read.csv(input$data_table[["datapath"]],na.strings="", fileEncoding="latin1")
+      if(!is.null(dataset_input())){ 
+        dataset_original <- read.csv(dataset_input()[["datapath"]], na.strings="", fileEncoding="latin1")
       }else{
         dataset_original <- read.csv("data/CALIPER.csv",na.strings="", fileEncoding="latin1")
       }
@@ -309,7 +332,7 @@ server <- function(input, output, session) {
 
   ##################################### Observe Events ############################################
   
-  observeEvent(input$data_table, {
+  observeEvent(input$dataset_file, {
     updateSelectInput(session, "parameter", choices = zlog_data()[,1])
   })
   

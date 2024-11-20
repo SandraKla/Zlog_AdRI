@@ -3,7 +3,7 @@
 <img src="www/Logo.svg" width="225px" height="150px" align="right"/>
 
 ![](https://img.shields.io/github/license/SandraKla/Zlog_AdRI.svg)
-![](https://img.shields.io/github/last-commit/SandraKla/Zlog_AdRI/master.svg)
+![](https://img.shields.io/github/last-commit/SandraKla/Zlog_AdRI/main.svg)
 
 This Shiny App computes the zlog values of the preceding and the subsequent reference interval for different analytes for each age group. Many medical reference intervals are not age-dependent and have large jumps between the individual age groups. This should be prevented by considering the zlog value. The lower reference limits (LL) and upper reference limits (UL) can transform any result x into a zlog value using the following equation: 
 
@@ -49,7 +49,7 @@ The package [DT](https://cran.r-project.org/web/packages/DT/index.html) (≥ 0.2
 Data from the [CALIPER-Database](https://caliper.research.sickkids.ca/#/) with age-dependent reference intervals has been preloaded into this Shiny App. For this purpose, the data were brought into the appropriate shape for the analysis from the [Supplemental Table 2](https://academic.oup.com/clinchem/article/58/5/854/5620695#supplementary-data) from the publication: *Closing the Gaps in Pediatric Laboratory Reference Intervals: A CALIPER Database of 40 Biochemical Markers in a Healthy and Multiethnic Population of Children*. 
 
 ### New data
-For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/blob/master/data/CALIPER.csv) as template with the columns: 
+For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/blob/main/data/CALIPER.csv) as template with the columns: 
 
 * **CODE**: Name of the analyte ("Calcium") 
 * **LABUNIT**: Unit of the analyte ("mmol/L")

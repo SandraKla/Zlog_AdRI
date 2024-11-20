@@ -4,7 +4,7 @@
 
 ### Load new data 
 
-For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/blob/master/data/CALIPER.csv) as template with the columns:
+For new data use the [CALIPER-Dataset](https://github.com/SandraKla/Zlog_AdRI/blob/main/data/CALIPER.csv) as template with the columns:
 
 * **CODE**: Name of the analyte ("Calcium") 
 * **LABUNIT**: Unit of the analyte ("mmol/L")
